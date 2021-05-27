@@ -1,0 +1,16 @@
+---
+- disciplina: PDS
+  turma: 431
+  periodo: 2021
+  equipe: TI TI TI
+  projeto: PETINDER
+  blog: https://equipetititi.blogspot.com
+  youtube: https://www.youtube.com/channel/UChy6ZnMiGcTSdUC29pF4t8A
+  repo: /A2021-PDS431/TI.TI.TI/
+  tags: ['adotar', 'cachorro', 'gato', 'tinder']
+  descr: >-
+    O PETINDER é uma aplicação Web que visa facilitar o processo
+    de adoção de cachorros e gatos. O sistema trabalha de forma
+    semelhante ao Tinder e busca encontrar a combinação perfeita
+    entre animal e adotante.
+---
