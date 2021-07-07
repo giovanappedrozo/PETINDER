@@ -10,12 +10,22 @@ if(isset($_FILES['faimg']['name'])&& $_FILES['faimg']['error'] == 0){
 
    if(strstr('.jpg;.jpeg;.gif;.png', $extensao)){
       $novoNome = md5(uniqid(time())).'.'.$extensao;
-      $destino = 'imagens/'.$novoNome;
- 
-      move_uploaded_file($arquivo_tmp, $destino);
+      $destino = 'img/'.$novoNome;
+      
+      if (move_uploaded_file ( $arquivo_tmp, $destino )) {
+         echo 'Animal cadastrado com sucesso!'. '<br />';
+<<<<<<< HEAD
+         echo 'Imagem salva em: ' . $destino . ' <a href="/">Voltar</a>';
+=======
+         echo 'Imagem salva em: ' . $destino . '<br />';
+>>>>>>> fdeaf7dd532cb5bca3480451df2a958d79fbe750
+         echo ' <img src = "' . $destino . '"/>';
+     }
+     else
+         echo 'Erro ao salvar o arquivo. Aparentemente você não tem permissão de escrita.<br />';
    }   
    else
-      echo 'Você poderá enviar apenas arquivos "*.jpg;*.jpeg;*.gif;*.png"<br />';
+      echo 'Você poderá enviar apenas arquivos "*.jpg;*.jpeg;*.gif;*.png"<br/>';
 }
 else
     echo 'Você não enviou nenhum arquivo!';

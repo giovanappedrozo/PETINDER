@@ -1,9 +1,12 @@
 function showPosition(position){
+  
+  var x = document.getElementById("demo");
+    
     var latitude = document.getElementById("latitude");
     var longitude = document.getElementById("longitude");
 
-    latitude.value = "1";
-    longitude.value = "1";
+    latitude = latitude.value = position.coords.latitude;
+    longitude = longitude.value = position.coords.longitude;
 }
   
 function showError(error){

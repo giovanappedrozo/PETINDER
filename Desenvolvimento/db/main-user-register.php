@@ -6,7 +6,7 @@ $genero = $_POST['fugenero'];
 $data = $_POST['fudata'];
 $confirmacao = $_POST['fuconfirmacao'];
 $latitude = $_POST['latitude'];
-$longitude = $_POST['latitude'];
+$longitude = $_POST['longitude'];
 $ponto = "($latitude, $longitude)";
 
 
@@ -20,7 +20,7 @@ if($confirmacao == $senha){
     $sql = "INSERT INTO usuario (id_usuario, nome, email, senha, id_genero, datanasci, localizacao) VALUES (DEFAULT, '$nome', '$email', '$criptografada', '$genero', '$data', '$ponto')";
     require_once("banco.class.php");
     $banco = new Banco;
-    //header("Location: ../");
+    header("Location: ../prova.php");
     try{
     $banco->Executar($sql);}
     catch (exception $e){

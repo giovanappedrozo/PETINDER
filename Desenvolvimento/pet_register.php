@@ -10,7 +10,7 @@ include('layout.php');
     </head>
     <body>
         <main>
-            <h1><?php $pagetitle = getLanguageString("Title_pet_register", $lang); echo $pagetitle; ?> &#128062;</h1>
+            <h1><?php $pagetitle = getLanguageString("Title_pet_register", $lang); echo $pagetitle; ?></h1>
             <form action="db/main-pet-register.php" enctype="multipart/form-data" method="POST">
                 <label for="faimg"><?php $addphoto = getLanguageString("Add_photo", $lang); echo $addphoto; ?>: </label>
                 <input type="file" name="faimg" id="faimg" accept=”image/*” required><br>

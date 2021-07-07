@@ -13,7 +13,7 @@ include('layout.php');
             <a href="login"><?php $account = getLanguageString("Registered", $lang); echo $account; ?></a>
         </header>
         <main>
-            <h1><?php echo $pagetitle; ?> &#128062;</h1>
+            <h1><?php echo $pagetitle; ?></h1>
             <form action="db/main-user-register.php" method="POST">
                 <label for="funome"><?php $name = getLanguageString("Name", $lang); echo $name; ?></label><br>
                 <input type="text" id="funome" name="funome" placeholder="<?php $name = getLanguageString("Name", $lang); echo $name; ?>" required><br>
@@ -40,11 +40,14 @@ include('layout.php');
                 <label for="fudata"><?php $birth_date = getLanguageString("BirthDate", $lang); echo $birth_date; ?></label><br>
                 <input type="date" name="fudata" id="fudata"><br>
 
-                <p id="demo">Tstando...</p>
-                <label onclick="getLocation()"><input type="checkbox" name="facastrado" id="facastrado" value="Habilitado">Procurar apenas animais proximos a voce</label><br>
+                <label onclick="getLocation()">
+                    <input type="checkbox" name="facastrado" id="facastrado" value="Habilitado">
+                        <?php $location = getLanguageString("Location", $lang); echo $location; ?>
+                </label><br>
+                <p id="demo"></p>
                 
-                <input type="hidden" name="latitude" value="0">
-                <input type="hidden" name="longitude" value="0">
+                <input type="hidden" name="latitude" id="latitude" value="0">
+                <input type="hidden" name="longitude" id="longitude" value="0">
 
                 <input type="submit" value="<?php echo $pagetitle; ?>">
             </form>

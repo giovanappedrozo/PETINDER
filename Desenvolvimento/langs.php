@@ -67,6 +67,7 @@ $translationsArray["pt_BR"]["Adopt"] = "ADOTAR";
 $translationsArray["pt_BR"]["FgPasswd"] = "Esqueceu a senha?";
 $translationsArray["pt_BR"]["Home"] = "IN&#205;CIO";
 $translationsArray["pt_BR"]["Profile"] = "Meu perfil";
+$translationsArray["pt_BR"]["Location"] = "Procurar apenas animais próximos a você";
 
 # EN-US            $lang     $string
 $translationsArray["en_US"]["Registered"] = "Already have an account?";
@@ -129,3 +130,4 @@ $translationsArray["en_US"]["Adopt"] = "ADOPT A PET";
 $translationsArray["en_US"]["FgPasswd"] = "Did you forget your password?";
 $translationsArray["en_US"]["Home"] = "HOME";
 $translationsArray["en_US"]["Profile"] = "My profile";
+$translationsArray["en_US"]["Location"] = "Only look for animals close to you";

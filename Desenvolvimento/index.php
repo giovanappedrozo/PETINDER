@@ -6,7 +6,7 @@ include('layout.php');
 <html lang="pt-br">
     <head>
         <meta charset="UTF-8"/>
-        <title><?php $pagetitle = getLanguageString("Title_reg", $lang); echo $pagetitle; ?> | PETINDER</title>
+        <title><?php $pagetitle = getLanguageString("Home", $lang); echo $pagetitle; ?> | PETINDER</title>
     </head>
     <body>
         <header>
