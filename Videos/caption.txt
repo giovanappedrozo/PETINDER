@@ -1,0 +1,8 @@
+1622131783|Criação do arquivo .yaml
+1623196559|Proposta Inicial
+1625443353|Common
+1625443353|CSS
+1625443353|Comunicação com o banco
+1625443353|Banco de dados
+1625443353|Index
+1625625123|JavaScript
