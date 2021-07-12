@@ -3,10 +3,6 @@ class Banco {
 
     private $conexao, $sql, $db;
     public $qry;
-    private $host = "b39-c80-e55-f72-gg14.postgres.database.azure.com";
-    private $user = "bcefgg92837584@b39-c80-e55-f72-gg14";
-    private $pass = "aZ2277petBCEfgg0809123ya";
-    private $banco = "postgres";
     private $porta = "5432";
 
     public function setHost($ip){
