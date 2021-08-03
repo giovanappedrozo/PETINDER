@@ -10,6 +10,7 @@ class Racas_model extends CI_Model {
         {
             if ($id_raca === FALSE)
             {
+                $this->db->order_by('raca', 'ASC');
                 $query = $this->db->get('raca');
                 return $query->result_array();
             }

@@ -20,7 +20,7 @@ class Usuarios_model extends CI_Model {
 
         $senha = $this->input->post('senha');
         $options = ['cost' => 12,];
-        $criptografada = password_hash($senha, PASSWORD_BCRYPT, $options);
+        //$criptografada = password_hash($senha, PASSWORD_BCRYPT, $options);
 
         $latitude = $this->input->post('latitude');
         $longitude = $this->input->post('longitude');
@@ -29,7 +29,7 @@ class Usuarios_model extends CI_Model {
         $data = array(
             'nome' => $this->input->post('nome'),
             'email' => $this->input->post('email'),
-            'senha' => $criptografada,
+            'senha' => $this->input->post('senha'),
             'id_genero' => $this->input->post('genero'),
             'datanasci' => $this->input->post('data'),
             'localizacao' => $ponto
@@ -38,14 +38,12 @@ class Usuarios_model extends CI_Model {
         return $this->db->insert('usuario', $data);
     }
 
-    function validate() {
-        $this->db->where('email', $this->input->post('email')); 
-        $this->db->where('senha', crypt($this->input->post('senha'), 'senha'));    
-        $query = $this->db->get('usuario'); 
-    
-        if ($query->num_rows == 1) { 
-            return true; 
-        }
+    function validate($email, $senha) {
+        $this->db->where('email', $email); 
+        $this->db->where('senha', $senha);    
+        $query = $this->db->get('usuario')->row_array(); 
+        
+        return $query;
     }
     
     function logged() {

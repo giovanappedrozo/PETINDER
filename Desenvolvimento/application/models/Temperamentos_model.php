@@ -15,6 +15,7 @@ class Temperamentos_model extends CI_Model {
                 if($lang == 'portuguese') $lang = 'pt_BR';
                 else $lang = 'en_US';
 
+                $this->db->order_by('temperamento', 'ASC');
                 $query = $this->db->get_where('temperamento', array('lang' => $lang));
                 return $query->result_array();
             }

@@ -1,69 +1,99 @@
-<?php echo validation_errors(); ?>
+<main class="container">
+        <?php echo validation_errors(); ?>
 
-<?php echo form_open_multipart('animais/register');?>
+        <?php echo form_open_multipart('animais/register');?>
 
-<label for="img"><?php echo $this->lang->line('Add_photo'); ?>: </label>
-<input type="file" name="img" id="img" required><br>
+        <div class="form-floating mb-4">
+                <label for="img"><?php echo $this->lang->line('Add_photo'); ?>: </label><br>
+                <input type="file" name="img" class="form-control form-control" id="img" required multiple>
+        </div>
 
-<label for="nome"><?php echo $this->lang->line('Name'); ?></label><br>
-<input type="text" name="nome" id="nome" placeholder="<?php echo $this->lang->line('Name_pet'); ?>" required><br>
+        <div class="form-floating mb-4">
+                <input type="text" id="nome" name="nome" class="form-control" placeholder="<?php echo $this->lang->line('PH_name'); ?>" required>
+                <label for="nome"><?php echo $this->lang->line('Name_pet'); ?></label>
+        </div>
 
-<label for="genero"><?php echo $this->lang->line('Sex'); ?></label></label><br>
-<select name="genero" id="genero">
-<?php foreach ($generos as $genero): ?>
-        <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero['genero']; ?></option>
-<?php endforeach; ?>
-</select><br>
+        <div class="form-outline mb-4">
+                <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Sex'); ?>" required>
+                <option value="" selected disabled><?php echo $this->lang->line('Sex'); ?></option>
+                <?php foreach ($generos as $genero): ?>
+                        <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero['genero']; ?></option>
+                <?php endforeach; ?>
+                </select>
+        </div>
 
-<label for="data"><?php echo $this->lang->line('BirthDate'); ?></label></label><br>
-<input type="date" name="data" id="data" required
-min="<?php $data = new DateTime('now'); $data->modify('-35 years'); echo $data->format('Y-m-d');?>"
-max="<?php $data = new DateTime('now'); echo $data->format('Y-m-d');?>"><br>
+        <div class="form-floating mb-4">
+                <input type="date" name="data" id="data" class="form-control" required 
+                min="<?php $data = new DateTime('now'); $data->modify('-35 years'); echo $data->format('Y-m-d');?>"
+                        max="<?php $data = new DateTime('now'); echo $data->format('Y-m-d');?>">
+                <label for="data"><?php echo $this->lang->line('BirthDate'); ?></label>
+        </div>
+        
 
-<label for="especie"><?php echo $this->lang->line('Species'); ?></label></label><br>
-<select name="especie" id="especie" onchange="changeBreed();">
-<?php foreach ($especies as $especie): ?>
-        <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie['especie']; ?></option>
-<?php endforeach; ?>
-</select><br>
+        <div class="form-outline mb-4">
+                <select name="especie" id="especie" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
+                <option value="" selected disabled><?php echo $this->lang->line('Species'); ?></option>
+                <?php foreach ($especies as $especie): ?>
+                        <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie['especie']; ?></option>
+                <?php endforeach; ?>
+                </select>
+        </div>
 
-<label for="raca"><?php echo $this->lang->line('Breed'); ?></label></label><br>
-<select name="raca" id="raca">
-<?php foreach ($racas as $raca): ?>
-        <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca['raca']; ?></option>
-<?php endforeach; ?>
-</select><br>
+        <div class="form-outline mb-4">
+                <select name="raca" id="raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>" required>
+                <option value="" selected disabled><?php echo $this->lang->line('Breed'); ?></option>
+                <?php foreach ($racas as $raca): ?>
+                        <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca['raca']; ?></option>
+                <?php endforeach; ?>
+                </select>
+        </div>
 
-<label for="porte"><?php echo $this->lang->line('Size'); ?> &#10067;</label><br>
-<select name="porte" id="porte">
-<?php foreach ($portes as $porte): ?>
-        <option value="<?php echo $porte['id_porte']; ?>"><?php echo $porte['porte']; ?></option>
-<?php endforeach; ?>
-</select><br>
+        <div class="form-outline mb-4">
+                <select name="porte" id="porte" class="form-select" placeholder="<?php echo $this->lang->line('Size'); ?>" required>
+                <option value="" selected disabled><?php echo $this->lang->line('Size'); ?></option>
+                <?php foreach ($portes as $porte): ?>
+                        <option value="<?php echo $porte['id_porte']; ?>"><?php echo $porte['porte']; ?></option>
+                <?php endforeach; ?>
+                </select>
+        </div>
 
-<label for="pelagem" ><?php echo $this->lang->line('Coat'); ?></label><br>
-<select name="pelagem" id="pelagem">
-<?php foreach ($pelagens as $pelagem): ?>
-        <option value="<?php echo $pelagem['id_pelagem']; ?>"><?php echo $pelagem['pelagem']; ?></option>
-<?php endforeach; ?>
-</select><br>
+        <div class="form-outline mb-4">
+                <select name="pelagem" id="pelagem" class="form-select" placeholder="<?php echo $this->lang->line('Coat'); ?>" required>
+                <option value="" selected disabled><?php echo $this->lang->line('Coat'); ?></option>
+                <?php foreach ($pelagens as $pelagem): ?>
+                        <option value="<?php echo $pelagem['id_pelagem']; ?>"><?php echo $pelagem['pelagem']; ?></option>
+                <?php endforeach; ?>
+                </select>
+        </div>
 
-<label for="especial"><?php echo $this->lang->line('Special'); ?></label><br>
-<label><input type="radio" name="especial" id="especial" value="TRUE" required><?php echo $this->lang->line('Yes'); ?></label><br>
-<label><input type="radio" name="especial" value="FALSE"><?php echo $this->lang->line('No'); ?></label><br>
+        <label for="especial"><?php echo $this->lang->line('Special'); ?></label><br>
+        <label><input type="radio" name="especial" id="especial" value="TRUE" required><?php echo $this->lang->line('Yes'); ?></label><br>
+        <label><input type="radio" name="especial" value="FALSE"><?php echo $this->lang->line('No'); ?></label><br>
 
-<label for="temperamento"><?php echo $this->lang->line('Temperament'); ?></label><br>
-<select name="temperamento" id="temperamento">
-<?php foreach ($temperamentos as $temperamento): ?>
-        <option value="<?php echo $temperamento['id_temperamento']; ?>"><?php echo $temperamento['temperamento']; ?></option>
-<?php endforeach; ?>
-</select><br>
+        <div class="form-outline mb-4">
+                <select name="temperamento" id="temperamento" class="form-select" placeholder="<?php echo $this->lang->line('Temperament'); ?>" required>
+                <option value="" selected disabled><?php echo $this->lang->line('Temperament'); ?></option>
+                <?php foreach ($temperamentos as $temperamento): ?>
+                        <option value="<?php echo $temperamento['id_temperamento']; ?>"><?php echo $temperamento['temperamento']; ?></option>
+                <?php endforeach; ?>
+                </select>
+        </div>
 
-<label><input type="checkbox" name="castrado" id="castrado" value="castrado"><?php echo $this->lang->line('Castrated'); ?></label><br>
+        <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="castrado" id="castrado" name="castrado">
+                <label class="form-check-label" for="castrado">
+                        <?php echo $this->lang->line('Castrated'); ?>
+                </label>
+        </div>
 
-<label for="info"><?php echo $this->lang->line('AddInfo'); ?></label><br>
-<input type="text" name="info" id="info" placeholder="<?php echo $this->lang->line('More_info'); ?>"><br>
+        <label class="form-check-label"><input type="checkbox" name="castrado" id="castrado" class="form-check-input" value="castrado">&nbsp;<?php echo $this->lang->line('Castrated'); ?></label><br>
 
-<input type="submit" name="submit" value="<?php echo $this->lang->line('Submit'); ?>">
+        <div class="form-floating mb-4">
+                <input type="text" id="info" name="info" class="form-control" placeholder="<?php echo $this->lang->line('More_info'); ?>">
+                <label for="info"><?php echo $this->lang->line('AddInfo'); ?></label>
+        </div>
 
-</form>
+        <input type="submit" name="submit" class="btn btn-primary btn-block mb-4" value="<?php echo $this->lang->line('Submit'); ?>">
+
+        </form>
+</main>

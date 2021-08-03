@@ -1,101 +1,52 @@
-<?php echo validation_errors(); ?>
+<main class="container">
+  <?php echo validation_errors(); ?>
 
-<?php echo form_open('usuarios/register'); ?>
+  <?php echo form_open('usuarios/register'); ?>
 
-<label for="nome"><?php echo $this->lang->line('Name'); ?></label><br>
-<input type="text" id="nome" name="nome" placeholder="<?php echo $this->lang->line('Name'); ?>" required><br>
+    <div class="form-floating mb-4">
+      <input type="text" id="nome" name="nome" class="form-control" placeholder="<?php echo $this->lang->line('PH_name'); ?>" required>
+      <label for="nome"><?php echo $this->lang->line('Name'); ?></label>
+    </div>
 
-<label for="email"><?php echo $this->lang->line('Email'); ?></label><br>
-<input type="email" name="email" id="email" placeholder="<?php echo $this->lang->line('Email'); ?>" required><br>
+    <div class="form-floating mb-4">
+    <input type="email" id="email" name="email" class="form-control" placeholder="<?php echo $this->lang->line('PH_email'); ?>" required>
+      <label for="email"><?php echo $this->lang->line('Email'); ?></label>
+    </div>
 
-<label for="senha"><?php echo $this->lang->line('Password'); ?></label><br>
-<input type="password" name="senha" id="senha" placeholder="*********" required><br>
+    <div class="form-floating mb-4">
+      <input type="password" id="senha" name="senha" class="form-control" placeholder="********" required>
+      <label for="senha"><?php echo $this->lang->line('Password'); ?></label>
+    </div>
 
-<label for="confirmacao"><?php echo $this->lang->line('Conf_passwd'); ?></label><br>
-<input type="password" name="confirmacao" id="confirmacao" placeholder="*********" required><br>
+    <div class="form-floating mb-4">
+      <input type="password" id="confirmacao" name="confirmacao" class="form-control" placeholder="********" required>
+      <label for="confirmacao"><?php echo $this->lang->line('Conf_passwd'); ?></label>
+    </div>
 
-<label for="genero"><?php echo $this->lang->line('Gender'); ?></label><br>
-<select name="genero" id="genero">
-<?php foreach ($generos as $genero): ?>
-        <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero['genero']; ?></option>
-<?php endforeach; ?>
-</select><br>
+    <div class="form-outline mb-4">
+      <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Gender'); ?>">
+      <option value="" selected disabled><?php echo $this->lang->line('Gender'); ?></option>
+      <?php foreach ($generos as $genero): ?>
+              <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero['genero']; ?></option>
+      <?php endforeach; ?>
+      </select>
+    </div>
 
-<label for="data"><?php echo $this->lang->line('BirthDate'); ?></label><br>
-<input type="date" name="data" id="data" required 
-min="<?php $data = new DateTime('now'); $data->modify('-108 years'); echo $data->format('Y-m-d');?>"
-max="<?php $data = new DateTime('now'); $data->modify('-18 years'); echo $data->format('Y-m-d');?>"><br>
-                
-<label onclick="getLocation()">
-<input type="checkbox" name="localizacao" id="localizacao" value="Habilitado">
-<?php echo $this->lang->line('Location'); ?>
-</label><br>
-<p id="demo"></p>
-                
-<input type="hidden" name="latitude" id="latitude" value="0">
-<input type="hidden" name="longitude" id="longitude" value="0">
+  <div class="form-floating mb-4">
+    <input type="date" name="data" id="data" class="form-control" required 
+    min="<?php $data = new DateTime('now'); $data->modify('-108 years'); echo $data->format('Y-m-d');?>"
+    max="<?php $data = new DateTime('now'); $data->modify('-18 years'); echo $data->format('Y-m-d');?>">
+    <label for="data"><?php echo $this->lang->line('BirthDate'); ?></label>
+  </div>  
+                  
+  <label onclick="getLocation()" class="form-check-label">
+  <input type="checkbox" class="form-check-input" name="localizacao" id="localizacao" value="Habilitado">
+  <?php echo $this->lang->line('Location'); ?>
+  </label><br>
 
-<input type="submit" name="submit" value="<?php echo $this->lang->line('Title_reg'); ?>">
-</form>
+  <input type="hidden" name="latitude" id="latitude" value="0">
+  <input type="hidden" name="longitude" id="longitude" value="0">
 
-<script>
-function showPosition(position){
-  
-  var x = document.getElementById("demo");
-    
-    var latitude = document.getElementById("latitude");
-    var longitude = document.getElementById("longitude");
-
-    latitude = latitude.value = position.coords.latitude;
-    longitude = longitude.value = position.coords.longitude;
-}
-  
-function showError(error){
-    var x = document.getElementById("demo");
-    switch(error.code) 
-      {
-      case error.PERMISSION_DENIED:
-        x.innerHTML="Usuário rejeitou a solicitação de Geolocalização."
-        break;
-      case error.POSITION_UNAVAILABLE:
-        x.innerHTML="Localização indisponível."
-        break;
-      case error.TIMEOUT:
-        x.innerHTML="A requisição expirou."
-        break;
-      case error.UNKNOWN_ERROR:
-        x.innerHTML="Algum erro desconhecido aconteceu."
-        break;
-      }
-}
-
-function getLocation(){
-  if (navigator.geolocation)
-    {
-    navigator.geolocation.getCurrentPosition(showPosition,showError);
-    }
-  else{x.innerHTML="Seu browser não suporta Geolocalização.";}
-}
-
-function changeBreed(){
-  var especie = document.getElementById("faespecie").value;
-  if(especie == 1){
-
-  }
-}
-
-$(document).ready(function () {
-  $("#faespecie").change(function () {
-      var val = $(this).val();
-      if (val == 1) {
-          $("#faraca").html("<option value='test'>item1: test 1</option><option value='test2'>item1: test 2</option>");
-      } else if (val == "item2") {
-          $("#size").html("<option value='test'>item2: test 1</option><option value='test2'>item2: test 2</option>");
-      } else if (val == "item3") {
-          $("#size").html("<option value='test'>item3: test 1</option><option value='test2'>item3: test 2</option>");
-      } else if (val == "item0") {
-          $("#size").html("<option value=''>--select one--</option>");
-      }
-  });
-});
-</script>
+  <input type="submit" id="submit" class="btn btn-primary btn-block mb-4" name="submit" value="<?php echo $this->lang->line('Title_reg'); ?>">
+  </form>
+</main>

@@ -56,3 +56,7 @@ $lang["OtherAnimals"] = "Esse seria o primeiro animal de estima&#231;&#227;o a v
 $lang["More_info"] = "Fale um pouco sobre o animal...";
 $lang["Title_user"] = "Usu&#225;rios";
 $lang["Title_animal"] = "Animais";
+$lang["PH_name"] = "Jo&#227;o da Silva";
+$lang["PH_email"] = "exemplo@email.com";
+$lang["Danger"] = "Usu&#225;rio ou senha inv&#225;lidos. Por favor, tente de novo ou cadastre-se ";
+$lang["Here"] = "aqui";

@@ -58,7 +58,7 @@ class Usuarios extends CI_Controller {
                 else
                 {
                         $this->usuarios_model->set_usuario();
-                        header("Location: ../");
+                        redirect('animais', 'refresh');
                 }
         }
 
@@ -122,12 +122,12 @@ class Usuarios extends CI_Controller {
 
                 $this->form_validation->set_rules('email', 'Email', 'required');
                 $this->form_validation->set_rules('senha', 'Password', 'required');
-                $this->form_validation->set_error_delimiters('<p class="error">', '</p>');
 
+                $email = $this->input->post('email');
+                $senha = $this->input->post('senha');
 
                 // MODELO MEMBERSHIP
-                $this->load->model('usuarios_model');
-                $query = $this->usuarios_model->validate();
+                $query = $this->usuarios_model->validate($email, $senha);
                 $data['title'] = $this->lang->line('Login');
 
 
@@ -141,14 +141,15 @@ class Usuarios extends CI_Controller {
 
                         if ($query) { // VERIFICA LOGIN E SENHA
                                 $data = array(
-                                'email' => $this->input->post('email'),
+                                'usuario' => $this->input->post('email'),
                                 'logged' => true
                                 );
                                 $this->session->set_userdata($data);
-                                redirect('animais/index');
+                                redirect('animais', 'refresh');
                         } 
                         else {
-                                redirect($this->index());
+                                $this->session->set_flashdata("danger", $this->lang->line("Danger")."<a href='".site_url('usuarios/register')."'>".$this->lang->line("Here")."</a>");
+                                redirect('usuarios/login', 'refresh');
                         }
                 }
         }
