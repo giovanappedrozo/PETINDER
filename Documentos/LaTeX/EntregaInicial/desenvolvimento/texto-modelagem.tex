@@ -1,0 +1,121 @@
+\chapter{Modelagem e levantamento de dados}
+% Falar do uso do modelo MVC e aplicacao no projeto (incluir modelo de classes, modelo do banco,
+
+\section{Análise de Requisitos}
+% Explicar o que sao
+Na engenharia de software, mais precisamente na engenharia de requisitos (comumente chamada apenas de Análise de Requisitos ou Levantamento de Requisitos) é a disciplina que identifica a “dor” do cliente, faz um “diagnóstico” sobre sua origem e propõem um “tratamento terapêutico” para curá-lo.
+
+\subsection{Requisitos funcionais}
+% Nao colocar apenas os quadros, explicar o que eh cada requisito
+Requisitos funcionais são todas as necessidades, características ou funcionalidades esperadas em um processo que podem ser atendidos pelo software.
+
+De forma geral, um requisito funcional expressa uma ação que deve ser realizada através do sistema, ou seja, um requisito funcional é “o que sistema DEVE fazer“.  No \autoref{quadro-rf} estão os requisitos funcionais da aplicação PETINDER.
+
+% Colocar os quadros em formato latex (modelo no arquivo "quadros"
+\begin{quadro}[htb]
+\centering
+\caption[Requisitos funcionais]{Requisitos funcionais}
+\label{quadro-rf}
+\begin{tabular}{|p{1.6cm}|p{12.5cm}|p{1.6cm}|}
+
+\hline     
+\thead{Código} & \thead{Descrição} & Requisito Relacionado\\ 
+\hline                               
+RF01 & O sistema deve permitir o cadastro de usuários que pretendem adotar e/ou doar cães e gatos. & \\
+\hline     
+RF02 & O sistema deve permitir o cadastro de animais.& \\
+\hline     
+RF03 & O sistema deve permitir um controle de informações dos animais cadastrados para um tutor. & RF02\\
+\hline     
+RF04 & O sistema deve apresentar a quantidade de animais cadastrados pelo tutor em sua conta. & RF02\\
+\hline 
+RF05 & O sistema deve permitir que um adotante demonstre interesse em um animal por meio do miau-dorei. & \\
+\hline 
+RF06 & O sistema deve apresentar as informações dos adotantes interessados pelos animais aos seus doadores. & \\
+\hline 
+RF07 & O sistema deve permitir que doador demonstre interesse no adotante por meio do miau-dorei. & \\
+\hline 
+RF08 & Quando o miau-dorei é mútuo entre doador e adotante o sistema deve notificar o match. & RF05\\
+\hline 
+RF09 & O sistema deve permitir a interação entre doador e adotante através do chat após o match. & \\
+\hline 
+RF10 & O chat do sistema deve mostrar hora e data das mensagens trocadas entre usuários. & RF09\\
+\hline 
+RF11 & Os adotantes que demonstrarem interesse em um animal com status “em processo de adoção” serão direcionados a uma fila de espera para caso a adoção anterior não seja concluída. & RF08\\
+\hline     
+\end{tabular}
+\fonte{Elaborada pelos autores}
+\end{quadro}
+
+
+\subsection{Requisitos não funcionais}
+Um requisito não funcional, por sua vez pode ser definido como “de qual maneira” o sistema deve fazer algo. Por outro lado pode parecer muito vago e com pouco sentido, mas é muito simples assimilar o conceito.
+
+Uma forma simples de entender o que é um requisito funcional é ter por base que todo requisito não funcional deve expressar uma premissa ou restrição do sistema. No \autoref{quadro-rnf} estão os requisitos não funcionais da aplicação PETINDER.
+
+\begin{quadro}[htb]
+\centering
+\ABNTEXfontereduzida
+\caption[Requisitos não funcionais]{Requisitos não funcionais}
+\label{quadro-rnf}
+\begin{tabular}{|p{1.6cm}|p{14.5cm}|}
+
+\hline     
+\thead{Código} & \thead{Descrição}  \\ 
+\hline                               
+RNF01 & Para utilizar o sistema o usuário precisa estar conectado a uma rede Wi-Fi ou dados móveis.\\
+\hline     
+RNF02 & Bcrypt será utilizado para segurança de senhas inseridas no sistema.\\
+\hline     
+RNF03 & O sistema deverá ter interligação com o banco de dados PostgreSQL. \\
+\hline     
+RNF04 & O sistema deverá ser desenvolvido para website.\\
+\hline     
+\end{tabular}
+\fonte{Elaborada pelos autores}
+\end{quadro}
+
+\subsection{Regras de negócio}
+Regras de negócio servem para definir ou restringir alguma ação nos processos de sua empresa.
+
+São declarações que irão descrever como determinadas operações devem ser realizadas e se há algum limite que precisa ser aplicado. São elas que guiarão comportamentos e definirão o que, onde, quando, porque e como algo deve ser feito em uma empresa. No \autoref{quadro-rn} estão as regras de negócio da aplicação PETINDER.
+
+\begin{quadro}[htb]
+\centering
+\ABNTEXfontereduzida
+\caption[Regras de negócio]{Regras de negócio}
+\label{quadro-rn}
+\begin{tabular}{|p{1.6cm}|p{14.5cm}|}
+
+\hline     
+\thead{Código} & \thead{Descrição} \\ 
+\hline                               
+RN01 & Os animais cadastrados no sistema devem ser exclusivamente para adoção.\\
+\hline     
+RN02 & Os animais cadastrados deverão ser apenas gatos e cachorros.\\
+\hline     
+RN03 & Os usuários podem atuar como adotantes e/ou doadores de animais dentro do  sistema. \\
+\hline     
+RN04 & O chat do sistema deve ser usado para seus devidos fins de adoção de animais. O Petinder contará com um sistema de denúncias para os usuários.\\
+\hline     
+RN05 & Denúncias avaliadas pelos administradores do sistema como verdadeiras geram uma infração para o perfil denunciado.\\
+\hline     
+RN06 & Caso um mesmo usuário cometa três infrações ele será banido temporariamente do sistema, se uma mesma conta for banida três vezes, ela será excluída permanentemente.\\
+\hline     
+RN07 & Os administradores do sistema não se responsabilizam por problemas relacionados à utilização de nossas ferramentas.\\
+\hline     
+RN08 & Os administradores do sistema não se responsabilizam pela saúde e/ou cuidados com os animais cadastrados.\\
+\hline     
+RN09 & Qualquer usuário pode ver a listagem de animais cadastrados no sistema.\\
+\hline     
+RN10 & Quando um usuário adota um animal ele adquire tutoria dos dados de cadastro do animal.\\
+\hline     
+RN11 & O usuário tem a opção de desfazer um des-au-gostei.\\
+\hline     
+RN12 & Caso um usuário não-logado tente interagir com as funções de adoção e/ou doação ele será redirecionado a tela de login.\\
+\hline     
+\end{tabular}
+\fonte{Elaborada pelos autores}
+\end{quadro}
+
+\input{desenvolvimento/texto-desenvolvimento}
