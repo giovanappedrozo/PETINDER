@@ -1,6 +1,10 @@
 <main class="container">
   <?php echo validation_errors(); ?>
 
+  <?php if($this->session->flashdata("danger")) { ?>
+        <p class="alert alert-danger"><?=  $this->session->flashdata("danger") ?></p>
+        <?php } unset($_SESSION['danger']);?>
+
   <?php echo form_open('usuarios/register'); ?>
 
     <div class="form-floating mb-4">
@@ -14,12 +18,12 @@
     </div>
 
     <div class="form-floating mb-4">
-      <input type="password" id="senha" name="senha" class="form-control" placeholder="********" required>
+      <input type="password" id="senha" name="senha" class="form-control" placeholder="********" required minlength="6">
       <label for="senha"><?php echo $this->lang->line('Password'); ?></label>
     </div>
 
     <div class="form-floating mb-4">
-      <input type="password" id="confirmacao" name="confirmacao" class="form-control" placeholder="********" required>
+      <input type="password" id="confirmacao" name="confirmacao" class="form-control" placeholder="********" required minlength="6">
       <label for="confirmacao"><?php echo $this->lang->line('Conf_passwd'); ?></label>
     </div>
 
@@ -44,8 +48,8 @@
   <?php echo $this->lang->line('Location'); ?>
   </label><br>
 
-  <input type="hidden" name="latitude" id="latitude" value="0">
-  <input type="hidden" name="longitude" id="longitude" value="0">
+  <input type="hidden" name="latitude" id="latitude">
+  <input type="hidden" name="longitude" id="longitude">
 
   <input type="submit" id="submit" class="btn btn-primary btn-block mb-4" name="submit" value="<?php echo $this->lang->line('Title_reg'); ?>">
   </form>

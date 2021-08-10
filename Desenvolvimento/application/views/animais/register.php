@@ -1,11 +1,10 @@
 <main class="container">
         <?php echo validation_errors(); ?>
-
         <?php echo form_open_multipart('animais/register');?>
 
-        <div class="form-floating mb-4">
-                <label for="img"><?php echo $this->lang->line('Add_photo'); ?>: </label><br>
-                <input type="file" name="img" class="form-control form-control" id="img" required multiple>
+        <div class="form-outline mb-4">
+                <label for="img" class="form-label"><?php echo $this->lang->line('Add_photo'); ?>: </label><br>
+                <input type="file" name='profile_pic' class="form-control form-control" id="img" required multiple>
         </div>
 
         <div class="form-floating mb-4">
@@ -31,16 +30,17 @@
         
 
         <div class="form-outline mb-4">
-                <select name="especie" id="especie" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
+                <select name="especie" id="especie" onchange="fetch_select(this.value);" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
                 <option value="" selected disabled><?php echo $this->lang->line('Species'); ?></option>
                 <?php foreach ($especies as $especie): ?>
                         <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie['especie']; ?></option>
                 <?php endforeach; ?>
                 </select>
         </div>
+        <p id="demo"></p>
 
         <div class="form-outline mb-4">
-                <select name="raca" id="raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>" required>
+                <select name="raca" id="raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>" required >
                 <option value="" selected disabled><?php echo $this->lang->line('Breed'); ?></option>
                 <?php foreach ($racas as $raca): ?>
                         <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca['raca']; ?></option>
@@ -66,9 +66,22 @@
                 </select>
         </div>
 
-        <label for="especial"><?php echo $this->lang->line('Special'); ?></label><br>
-        <label><input type="radio" name="especial" id="especial" value="TRUE" required><?php echo $this->lang->line('Yes'); ?></label><br>
-        <label><input type="radio" name="especial" value="FALSE"><?php echo $this->lang->line('No'); ?></label><br>
+        <div class="form-outline mb-4">
+                <label for="check" class="form-label"><?php echo $this->lang->line('Special'); ?></label><br>
+                <div class="form-check" id="check">
+                <input class="form-check-input" type="radio" name="especial" id="espSim" value="TRUE" required>
+                        <label class="form-check-label" for="espSim">
+                                <?php echo $this->lang->line('Yes'); ?>
+                        </label>
+                </div>
+                <div class="form-check">
+                <input class="form-check-input" type="radio" name="especial" id="espNao" value="FALSE" required>
+                        <label class="form-check-label" for="espNao">
+                                <?php echo $this->lang->line('No'); ?>
+                        </label>
+                </div>
+        </div>
+
 
         <div class="form-outline mb-4">
                 <select name="temperamento" id="temperamento" class="form-select" placeholder="<?php echo $this->lang->line('Temperament'); ?>" required>
@@ -86,12 +99,12 @@
                 </label>
         </div>
 
-        <label class="form-check-label"><input type="checkbox" name="castrado" id="castrado" class="form-check-input" value="castrado">&nbsp;<?php echo $this->lang->line('Castrated'); ?></label><br>
-
         <div class="form-floating mb-4">
                 <input type="text" id="info" name="info" class="form-control" placeholder="<?php echo $this->lang->line('More_info'); ?>">
                 <label for="info"><?php echo $this->lang->line('AddInfo'); ?></label>
         </div>
+
+        <input type="hidden" name="doador" value="<?php echo $this->session->userdata("id"); ?>">
 
         <input type="submit" name="submit" class="btn btn-primary btn-block mb-4" value="<?php echo $this->lang->line('Submit'); ?>">
 

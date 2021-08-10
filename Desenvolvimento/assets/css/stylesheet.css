@@ -1,0 +1,117 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    overflow-x: hidden;
+}
+
+main{
+    min-height: 100%;
+}
+
+.img-responsive{
+    width: 130px !important;
+    height: 30px;
+    margin-bottom: 10px !important;
+}
+
+.form-floating mb-4, .form-control{
+    border: none !important;
+    border-bottom: thin solid rgb(230, 230, 230) !important;
+}
+
+.col{
+    color: rgb(186, 48, 48) !important;
+}
+
+.btn-primary {
+    background-color: rgb(186, 48, 48) !important;
+}
+
+.form-label{
+    background-color: white !important;
+    width: 90%;
+    height: 27px;
+}
+
+.form-select{
+    border: none !important;
+    border-bottom: thin solid rgb(230, 230, 230) !important;
+    cursor: pointer !important;
+}
+
+.form-select:focus{
+    box-shadow: none !important;
+}
+
+#data{
+    cursor: pointer !important;
+}
+
+.form-check-label{
+    margin-bottom: 10px;
+}
+
+.page-title{
+    padding: 3%;
+    color: rgb(186, 48, 48) !important;
+    text-align: center !important;
+}
+
+#submit{
+    font-size: 89% !important;    
+}
+
+.text-center{
+    padding: 32px;
+}
+
+.btn-login{
+    padding: 5px;
+    color: rgb(186, 48, 48);
+    border: 1px solid rgb(186, 48, 48);
+    border-radius: 20px;
+}
+
+.btn-login:hover{
+    color: rgb(255, 255, 255);
+    background-color: rgb(186, 48, 48);
+}
+
+#navbarDropdownMenuLink{
+    color: rgb(186, 48, 48);
+}
+
+#container-filter{
+    width: 40%;
+}
+
+.col-3{
+    width: 150px !important;
+}
+
+#img-feed{
+    max-width: 100%;
+    height: 100px;
+    width: 150px;
+    object-fit: cover;
+}
+
+#img-view{
+    max-width: 100%;
+    width: 400px;
+    height: 300px;
+    object-fit: cover;
+}
+
+.bg-image{
+    max-width: 100%;
+    width: 400px !important;
+    height: 300px !important;
+}
+
+.bi-heart, .bi-heart-fill, #like-link{
+    color: rgb(186, 48, 48) !important;
+}

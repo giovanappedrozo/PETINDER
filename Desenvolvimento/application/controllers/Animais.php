@@ -12,17 +12,26 @@ class Animais extends CI_Controller {
                 $this->load->model('pelagens_model');
                 $this->load->model('temperamentos_model');
                 $this->load->helper('url_helper');
+                $this->load->library('form_validation');
+
                 // $this->lang->load('content','portuguese');
         }
 
         public function index()
         { 
-            $data['animais'] = $this->animais_model->get_animais();
-            $data['title'] = $this->lang->line('Title_animal');
-            
-            $this->load->view('templates/header', $data);
-            $this->load->view('animais/index', $data);
-            $this->load->view('templates/footer');
+                $data['animais'] = $this->animais_model->get_animais();
+                $data['title'] = $this->lang->line('Title_animal');
+                $data['generos'] = $this->generos_model->get_genero();
+                $data['especies'] = $this->especies_model->get_especie();
+                $data['racas'] = $this->racas_model->get_raca();
+                $data['portes'] = $this->portes_model->get_porte();
+                $data['pelagens'] = $this->pelagens_model->get_pelagem();
+                $data['temperamentos'] = $this->temperamentos_model->get_temperamento();
+                $data['operador'] = '!=';
+
+                $this->load->view('templates/header', $data);
+                $this->load->view('animais/index', $data);
+                $this->load->view('templates/footer');
         } 
 
         public function view($id_animal = NULL)
@@ -41,10 +50,10 @@ class Animais extends CI_Controller {
                 $this->load->view('templates/footer');
         }
 
+
         public function register()
         {
                 $this->load->helper('url', 'form');	
-	        $this->load->library('form_validation');
 
                 $data['title'] = $this->lang->line('Title_pet_register');
                 $data['generos'] = $this->generos_model->get_genero();
@@ -55,37 +64,29 @@ class Animais extends CI_Controller {
                 $data['temperamentos'] = $this->temperamentos_model->get_temperamento();
 
                 $config['upload_path'] = './assets/fotos';
-                $config['allowed_types'] = 'jpeg|jpg|png';
+                $config['allowed_types'] = 'jpeg|jpg|png|gif';
                 $config['max_size'] = 2000;
                 $config['max_width'] = 1500;
                 $config['max_height'] = 1500;
+                $config['file_name'] = md5(uniqid(time()));
 
                 $this->load->library('upload', $config);
 
-                $this->upload->do_upload('img');
-                       
-                $this->form_validation->set_rules('img', 'imagem', 'required');
                 $this->form_validation->set_rules('nome', 'nome', 'required');
-                $this->form_validation->set_rules('genero', 'sexo', 'required');
-                $this->form_validation->set_rules('data', 'data de nascimento', 'required');
-                $this->form_validation->set_rules('especie', 'especie', 'required');
-                $this->form_validation->set_rules('raca', 'raca', 'required');
-                $this->form_validation->set_rules('porte', 'porte', 'required');
-                $this->form_validation->set_rules('pelagem', 'pelagem', 'required');
-                $this->form_validation->set_rules('especial', 'necessidades especiais', 'required');
-                $this->form_validation->set_rules('temperamento', 'temperamento', 'required');
 
-                if ($this->form_validation->run() === FALSE)
+                if (($this->form_validation->run() === FALSE) || (!$this->upload->do_upload('profile_pic')))
                 {
+                        $error = array('error' => $this->upload->display_errors());
                         $this->load->view('templates/header', $data);
-                        $this->load->view('animais/register', $data);
+                        $this->load->view('animais/register', $data, $error);
                         $this->load->view('templates/footer');
 
                 }
                 else
                 {
+                        $data = array('image_metadata' => $this->upload->data());
                         $this->animais_model->set_animais();
-                        $this->load->view('animais/success');
+                        redirect('animais', 'refresh');
                 }
         }
 }

@@ -50,6 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
+$route['imagem'] = 'imageUpload_Controller';
 $route['usuarios/login'] = 'usuarios/login';
 $route['animais/register'] = 'animais/register';
 $route['animais/(:any)'] = 'animais/view/$1';
@@ -57,6 +58,7 @@ $route['animais'] = 'animais';
 $route['usuarios/register'] = 'usuarios/register';
 $route['usuarios/application'] = 'usuarios/application';
 $route['usuarios/distance'] = 'usuarios/distance';
+$route['usuarios/logout'] = 'usuarios/logout';
 $route['usuarios/(:any)'] = 'usuarios/view/$1';
 $route['usuarios'] = 'usuarios';
 $route['(:any)'] = 'pages/view/$1';

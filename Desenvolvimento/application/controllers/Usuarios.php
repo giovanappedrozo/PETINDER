@@ -42,12 +42,13 @@ class Usuarios extends CI_Controller {
                 $data['title'] = $this->lang->line('Title_reg');
                 $data['generos'] = $this->generos_model->get_genero();
 
-                $this->form_validation->set_rules('nome', 'Title', 'required');
-                $this->form_validation->set_rules('email', 'Text', 'required');
-                $this->form_validation->set_rules('genero', 'Title', 'required');
-                $this->form_validation->set_rules('data', 'Text', 'required');
-                $this->form_validation->set_rules('senha', 'Title', 'required');
-
+                $this->form_validation->set_rules('nome', 'Nome', 'required|min_length[3]|max_length[100]');
+                $this->form_validation->set_rules('email', 'E-mail', 'required|valid_email');
+                $this->form_validation->set_rules('genero', 'Genero', 'required');
+                $this->form_validation->set_rules('data', 'Data de nascimento', 'required');
+                $this->form_validation->set_rules('senha', 'Senha', 'required|min_length[6]');
+                $this->form_validation->set_rules('confirmacao', 'Confirmação de Senha','required|matches[senha]');
+                
                 if ($this->form_validation->run() === FALSE)
                 {
                         $this->load->view('templates/header', $data);
@@ -58,7 +59,11 @@ class Usuarios extends CI_Controller {
                 else
                 {
                         $this->usuarios_model->set_usuario();
-                        redirect('animais', 'refresh');
+
+                        if($this->session->flashdata("danger"))
+                                redirect('usuarios/register', 'refresh');
+                        else 
+                                redirect('animais', 'refresh');  
                 }
         }
 
@@ -141,7 +146,8 @@ class Usuarios extends CI_Controller {
 
                         if ($query) { // VERIFICA LOGIN E SENHA
                                 $data = array(
-                                'usuario' => $this->input->post('email'),
+                                'usuario' => $query['nome'],
+                                'id' => $query['id_usuario'],
                                 'logged' => true
                                 );
                                 $this->session->set_userdata($data);
@@ -156,7 +162,7 @@ class Usuarios extends CI_Controller {
                         
         public function logout(){
                 $this->session->sess_destroy();
-                redirect('usuarios/login');
+                redirect('/');
         }
 
 }

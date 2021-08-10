@@ -129,6 +129,15 @@ CREATE TABLE IF NOT EXISTS usuario(
         CONSTRAINT fk_outrosAnimais FOREIGN KEY (id_outrosAnimais) REFERENCES outrosAnimais(id_outrosAnimais)
 );
 
+CREATE TABLE IF NOT EXISTS avaliacao (
+        id_avaliacao SERIAL PRIMARY KEY,
+        avaliacao BOOLEAN,
+        id_usuario INTEGER,
+        id_animal INTEGER,
+        CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
+        CONSTRAINT fk_animal FOREIGN KEY (id_animal) REFERENCES animal(id_animal)
+)
+
 CREATE TABLE IF NOT EXISTS animal(
         id_animal SERIAL CONSTRAINT pk_animal PRIMARY KEY,
         imagem VARCHAR(70) NOT NULL,
@@ -138,10 +147,13 @@ CREATE TABLE IF NOT EXISTS animal(
         id_raca INTEGER,
         id_porte INTEGER,
         castrado BOOLEAN NOT NULL,
-        infoAdicional VARCHAR(255), 
+        especial BOOLEAN NOT NULL,
+        infoAdicional VARCHAR(255),
         id_status INTEGER, 
         id_pelagem INTEGER,
         id_temperamento INTEGER, 
+        id_doador INTEGER,
+        CONSTRAINT fk_usuario FOREIGN KEY (id_doador) REFERENCES usuario(id_usuario),
         CONSTRAINT fk_raca FOREIGN KEY (id_raca) REFERENCES raca(id_raca),
         CONSTRAINT fk_genero FOREIGN KEY (id_genero) REFERENCES genero(id_genero),
         CONSTRAINT fk_porte FOREIGN KEY (id_porte) REFERENCES porte(id_porte),

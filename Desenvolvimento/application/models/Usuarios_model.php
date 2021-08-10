@@ -18,32 +18,46 @@ class Usuarios_model extends CI_Model {
     public function set_usuario(){
         $this->load->helper('url');
 
-        $senha = $this->input->post('senha');
-        $options = ['cost' => 12,];
-        //$criptografada = password_hash($senha, PASSWORD_BCRYPT, $options);
+        $email = $this->input->post('email');
 
-        $latitude = $this->input->post('latitude');
-        $longitude = $this->input->post('longitude');
-        $ponto = "($latitude, $longitude)";
+        $this->db->where('email', $email); 
+        $query = $this->db->get('usuario')->row_array();
 
-        $data = array(
-            'nome' => $this->input->post('nome'),
-            'email' => $this->input->post('email'),
-            'senha' => $this->input->post('senha'),
-            'id_genero' => $this->input->post('genero'),
-            'datanasci' => $this->input->post('data'),
-            'localizacao' => $ponto
-        );
+        if(!$query){
+            $senha = $this->input->post('senha');
+            $options = ['cost' => 12,];
+            $criptografada = password_hash($senha, PASSWORD_BCRYPT, $options);
 
-        return $this->db->insert('usuario', $data);
+            $latitude = $this->input->post('latitude');
+            $longitude = $this->input->post('longitude');
+
+            if($latitude && $longitude)
+                $ponto = "($latitude, $longitude)";
+            else $ponto = null;
+
+            $data = array(
+                'nome' => $this->input->post('nome'),
+                'email' => $email,
+                'senha' => $criptografada,
+                'id_genero' => $this->input->post('genero'),
+                'datanasci' => $this->input->post('data'),
+                'localizacao' => $ponto
+            );
+
+            $this->db->insert('usuario', $data);
+        }
+        else 
+            return $this->session->set_flashdata("danger", $this->lang->line("EmailRepeated")."<a href='".site_url('usuarios/register')."'>".$this->lang->line("Here")."</a>");
     }
 
     function validate($email, $senha) {
-        $this->db->where('email', $email); 
-        $this->db->where('senha', $senha);    
-        $query = $this->db->get('usuario')->row_array(); 
+        $this->db->where('email', $email);
+        $query = $this->db->get('usuario')->row_array();
         
-        return $query;
+        $senhaguardada = isset($query['senha']);
+
+        if(crypt($senha,$senhaguardada) == $senhaguardada)        
+            return $query;
     }
     
     function logged() {

@@ -1,29 +1,30 @@
 <?php
-class Animais_model extends CI_Model {
+class Avaliacao_model extends CI_Model {
 
         public function __construct()
         {
             $this->load->database();
         }
 
-        public function get_animais($id_animal = FALSE)
+        public function get_avaliacao($id_avaliacao = FALSE)
         {
-            if ($id_animal === FALSE)
+            if ($id_avaliacao === FALSE)
             {
-                $query = $this->db->get('animal');
+                $lang = $this->session->get_userdata('site_lang');
+                $lang = $lang['site_lang'];
+                if($lang == 'portuguese') $lang = 'pt_BR';
+                else $lang = 'en_US';
+
+                $query = $this->db->get_where('avaliacao', array('lang' => $lang));
                 return $query->result_array();
             }
-    
-            $query = $this->db->get_where('animal', array('id_animal' => $id_animal));
+      
+            $query = $this->db->get_where('avaliacao', array('avaliacao' => $id_avaliacao));
             return $query->row_array();
         }
-        
-        public function set_animais()
+    
+        public function set_avaliacao()
         {
-            $this->load->helper('url');
-
-            // $slug = url_title($this->input->post('title'), 'dash', TRUE);
-
             $cast = $this->input->post('castrado');
             $img = $imagem = $this->upload->data();
             $img = $img['file_name'];
