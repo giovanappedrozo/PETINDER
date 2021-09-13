@@ -1,3 +1,4 @@
+CREATE EXTENSION postgis;
 CREATE TABLE IF NOT EXISTS moradia(
         id_moradia SERIAL CONSTRAINT pk_id_moradia PRIMARY KEY,
         moradia VARCHAR(11) NOT NULL,
@@ -115,10 +116,13 @@ CREATE TABLE IF NOT EXISTS usuario(
         nome VARCHAR(80) NOT NULL,
         email VARCHAR(60) NOT NULL,  
         senha CHAR(60) NOT NULL,
-        id_genero INTEGER,
-        datanasci DATE,
+        id_genero INTEGER NOT NULL,
+        datanasci DATE NOT NULL,
         localizacao POINT,
         criancas BOOLEAN,
+        acessoprotegido BOOLEAN,
+        gastos BOOLEAN,
+        alergia BOOLEAN,
         qtdMoradores SMALLINT,
         id_moradia INTEGER,
         id_horasSozinho INTEGER, 
@@ -128,15 +132,6 @@ CREATE TABLE IF NOT EXISTS usuario(
         CONSTRAINT fk_horasSozinho FOREIGN KEY (id_horasSozinho) REFERENCES horasSozinho(id_horasSozinho),
         CONSTRAINT fk_outrosAnimais FOREIGN KEY (id_outrosAnimais) REFERENCES outrosAnimais(id_outrosAnimais)
 );
-
-CREATE TABLE IF NOT EXISTS avaliacao (
-        id_avaliacao SERIAL PRIMARY KEY,
-        avaliacao BOOLEAN,
-        id_usuario INTEGER,
-        id_animal INTEGER,
-        CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario),
-        CONSTRAINT fk_animal FOREIGN KEY (id_animal) REFERENCES animal(id_animal)
-)
 
 CREATE TABLE IF NOT EXISTS animal(
         id_animal SERIAL CONSTRAINT pk_animal PRIMARY KEY,
@@ -153,11 +148,41 @@ CREATE TABLE IF NOT EXISTS animal(
         id_pelagem INTEGER,
         id_temperamento INTEGER, 
         id_doador INTEGER,
-        CONSTRAINT fk_usuario FOREIGN KEY (id_doador) REFERENCES usuario(id_usuario),
+        CONSTRAINT fk_usuario FOREIGN KEY (id_doador) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
         CONSTRAINT fk_raca FOREIGN KEY (id_raca) REFERENCES raca(id_raca),
         CONSTRAINT fk_genero FOREIGN KEY (id_genero) REFERENCES genero(id_genero),
         CONSTRAINT fk_porte FOREIGN KEY (id_porte) REFERENCES porte(id_porte),
         CONSTRAINT fk_status FOREIGN KEY (id_status) REFERENCES statusAnimal(id_status),
         CONSTRAINT fk_pelagem FOREIGN KEY (id_pelagem) REFERENCES pelagem(id_pelagem),
         CONSTRAINT fk_temperamento FOREIGN KEY (id_temperamento) REFERENCES temperamento(id_temperamento)  
+);
+
+CREATE TABLE IF NOT EXISTS avaliacao_animal (
+        id_avaliacao SERIAL PRIMARY KEY,
+        avaliacao BOOLEAN,
+        id_usuario INTEGER,
+        id_animal INTEGER,
+        CONSTRAINT fk_usuario FOREIGN KEY (id_usuario) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
+        CONSTRAINT fk_animal FOREIGN KEY (id_animal) REFERENCES animal(id_animal) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS avaliacao_usuario (
+        id_avaliacao SERIAL PRIMARY KEY,
+        avaliacao BOOLEAN,
+        id_doador INTEGER,
+        id_adotante INTEGER,
+        CONSTRAINT fk_doador FOREIGN KEY (id_doador) REFERENCES usuario(id_usuario) ON DELETE CASCADE,
+        CONSTRAINT fk_adotante FOREIGN KEY (id_adotante) REFERENCES usuario(id_usuario) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS mensagem (
+        id_mensagem SERIAL CONSTRAINT pk_id_mensagem PRIMARY KEY,
+        conteudo VARCHAR (255), 
+        dataHora TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+        id_remetente INTEGER NOT NULL,
+        id_destinatario INTEGER NOT NULL,
+        id_animal INTEGER,
+        CONSTRAINT fk_remetente FOREIGN KEY (id_remetente) REFERENCES usuario(id_usuario) ON DELETE SET NULL ,
+        CONSTRAINT fk_destinatario FOREIGN KEY (id_destinatario) REFERENCES usuario(id_usuario) ON DELETE SET NULL ,
+        CONSTRAINT fk_animal FOREIGN KEY (id_animal) REFERENCES animal(id_animal) ON DELETE SET NULL          
 );

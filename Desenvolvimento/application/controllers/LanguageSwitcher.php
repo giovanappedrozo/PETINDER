@@ -7,7 +7,7 @@ class LanguageSwitcher extends CI_Controller {
   public function index()
   {
     $this->session->set_userdata('site_lang',  "portuguese");
-    header('Location: http://localhost/ci/index.php/animais');
+    header('Location: '.site_url("animais"));
   }
   public function switchLang($language = "") {
     $this->session->set_userdata('site_lang', $language);

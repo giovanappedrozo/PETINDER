@@ -4,7 +4,7 @@
 
         <div class="form-outline mb-4">
                 <label for="img" class="form-label"><?php echo $this->lang->line('Add_photo'); ?>: </label><br>
-                <input type="file" name='profile_pic' class="form-control form-control" id="img" required multiple>
+                <input type="file" name='profile_pic' accept=".jpeg,.jpg,.png,.gif" class="form-control form-control" id="img" required>
         </div>
 
         <div class="form-floating mb-4">
@@ -30,21 +30,26 @@
         
 
         <div class="form-outline mb-4">
-                <select name="especie" id="especie" onchange="fetch_select(this.value);" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
+                <select name="especie" id="especie" onchange="change();" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
                 <option value="" selected disabled><?php echo $this->lang->line('Species'); ?></option>
                 <?php foreach ($especies as $especie): ?>
                         <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie['especie']; ?></option>
                 <?php endforeach; ?>
                 </select>
         </div>
-        <p id="demo"></p>
 
         <div class="form-outline mb-4">
                 <select name="raca" id="raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>" required >
                 <option value="" selected disabled><?php echo $this->lang->line('Breed'); ?></option>
-                <?php foreach ($racas as $raca): ?>
+                <option disabled value=""><?php echo " ------------------------------------------------------------------------------------------------------------ ".$this->lang->line("Breed_dog")." -----------------------------------------------------------------------------------------------------------";?></option>
+                <?php foreach ($racas as $raca): 
+                        if($raca['raca'] == 'Yorkshire Terrier'){ ?>
                         <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca['raca']; ?></option>
-                <?php endforeach; ?>
+                        <option disabled value=""><?php echo " ------------------------------------------------------------------------------------------------------------ ".$this->lang->line("Breed_cat")." -----------------------------------------------------------------------------------------------------------";?></option>
+                        <?php } 
+                        else{ ?>
+                                <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca['raca']; ?></option>
+                <?php }endforeach; ?>
                 </select>
         </div>
 

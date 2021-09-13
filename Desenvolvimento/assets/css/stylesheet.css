@@ -84,6 +84,19 @@ main{
     color: rgb(186, 48, 48);
 }
 
+.icones{
+    color: rgb(186, 48, 48);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+
+.icones:hover{
+    color: rgb(186, 48, 48);
+}
+
 #container-filter{
     width: 40%;
 }
@@ -92,11 +105,11 @@ main{
     width: 150px !important;
 }
 
-#img-feed{
-    max-width: 100%;
-    height: 100px;
-    width: 150px;
-    object-fit: cover;
+.img-feed{
+    max-width: 100% !important;
+    height: 100px !important;
+    width: 150px !important;
+    object-fit: cover !important;
 }
 
 #img-view{
@@ -112,6 +125,14 @@ main{
     height: 300px !important;
 }
 
-.bi-heart, .bi-heart-fill, #like-link{
-    color: rgb(186, 48, 48) !important;
+.btn-primary{
+    font-size: medium !important;
+}
+
+.select{
+    width: 130%;
+}
+
+.btn-hidden{
+    display: none;
 }

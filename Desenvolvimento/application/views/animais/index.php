@@ -1,14 +1,21 @@
 <main class="container">
-        <hr />
+        
+<?php if($this->session->flashdata("danger")) { ?>
+        <p class="alert alert-danger"><?=  $this->session->flashdata("danger") ?></p>
+        <?php } unset($_SESSION['danger']);?>
+
+<?php if($this->session->flashdata("success")) { ?>
+        <p class="alert alert-success"><?=  $this->session->flashdata("success") ?></p>
+<?php } unset($_SESSION['success']);?>
+        <hr /> 
         <?php foreach ($animais as $animal): 
                 if($animal['id_doador'] != $this->session->userdata("id")){?>
         <div class="card px-3 pt-3">
-                <!-- News -->
-                <a href="<?php echo site_url('animais/'.$animal['id_animal']); ?>" class="text-dark">
+                <a href="<?php echo site_url('animais/view/'.$animal['id_animal']); ?>" class="text-dark">
                         <div class="row mb-4 border-bottom pb-2">
                                 <div class="col-3">
                                         <img src="<?php echo base_url('assets/fotos/'.$animal['imagem']); ?>"
-                                        class="img-fluid shadow-1-strong rounded" alt="" id="img-feed"/>
+                                        class="img-fluid shadow-1-strong rounded img-feed" alt=""/>
                                 </div>
 
                                 <div class="col-9">
@@ -42,4 +49,5 @@
                 </a> 
         </div>
         <?php } endforeach; ?>
+        <p><?php echo $links; ?></p>
 </main>

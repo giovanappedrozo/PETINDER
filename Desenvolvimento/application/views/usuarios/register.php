@@ -42,11 +42,6 @@
     max="<?php $data = new DateTime('now'); $data->modify('-18 years'); echo $data->format('Y-m-d');?>">
     <label for="data"><?php echo $this->lang->line('BirthDate'); ?></label>
   </div>  
-                  
-  <label onclick="getLocation()" class="form-check-label">
-  <input type="checkbox" class="form-check-input" name="localizacao" id="localizacao" value="Habilitado">
-  <?php echo $this->lang->line('Location'); ?>
-  </label><br>
 
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
@@ -54,3 +49,4 @@
   <input type="submit" id="submit" class="btn btn-primary btn-block mb-4" name="submit" value="<?php echo $this->lang->line('Title_reg'); ?>">
   </form>
 </main>
+<script> window.onload = getLocation(); </script>
