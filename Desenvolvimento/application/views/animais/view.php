@@ -61,7 +61,7 @@
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($racas as $raca){
-                      if($raca['id_raca'] == $animal['id_raca']) echo $raca['raca']; 
+                      if($raca['id_raca'] == $animal['id_raca']) echo $raca[$lang]; 
                     }
                     ?>
                   </p>
@@ -71,7 +71,7 @@
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($generos as $genero){
-                      if($genero['id_genero'] == $animal['id_genero']) echo $genero['genero']; 
+                      if($genero['id_genero'] == $animal['id_genero']) echo $genero[$lang]; 
                     } ?>
                   </p>
                 </div>
@@ -80,7 +80,7 @@
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($portes as $porte){
-                      if($porte['id_porte'] == $animal['id_porte']) echo $porte['porte']; 
+                      if($porte['id_porte'] == $animal['id_porte']) echo $porte[$lang]; 
                     }
                     ?>
                   </p>
@@ -90,7 +90,7 @@
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($pelagens as $pelagem){
-                      if($pelagem['id_pelagem'] == $animal['id_pelagem']) echo $pelagem['pelagem']; 
+                      if($pelagem['id_pelagem'] == $animal['id_pelagem']) echo $pelagem[$lang]; 
                     }
                     ?>
                   </p>
@@ -105,7 +105,7 @@
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($temperamentos as $temperamento){
-                      if($temperamento['id_temperamento'] == $animal['id_temperamento']) echo $temperamento['temperamento']; 
+                      if($temperamento['id_temperamento'] == $animal['id_temperamento']) echo $temperamento[$lang]; 
                     }
                     ?>
                   </p>

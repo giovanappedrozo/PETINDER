@@ -4,8 +4,6 @@ function showPosition(position){
 
   latitude = latitude.value = position.coords.latitude;
   longitude = longitude.value = position.coords.longitude;
-
-  document.getElementById('submit').click();
 }
     
 function showError(error){
@@ -22,7 +20,7 @@ function showError(error){
       window.alert("A requisição expirou.");
       break;
     case error.UNKNOWN_ERROR:
-      window.alert("Algum erro desconhecido aconteceu.");z
+      window.alert("Algum erro desconhecido aconteceu.");
       break;
   }
 }
@@ -33,7 +31,3 @@ function getLocation(){
   }
   else{x.innerHTML="Seu browser não suporta Geolocalização.";}
 }
-
-$(function () {
-  $('[data-toggle="tooltip"]').tooltip()
-})

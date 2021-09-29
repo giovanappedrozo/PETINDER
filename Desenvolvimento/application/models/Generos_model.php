@@ -10,12 +10,7 @@ class Generos_model extends CI_Model {
         {
             if ($id_genero === FALSE)
             {
-                $lang = $this->session->get_userdata('site_lang');
-                $lang = $lang['site_lang'];
-                if($lang == 'portuguese') $lang = 'pt_BR';
-                else $lang = 'en_US';
-
-                $query = $this->db->get_where('genero', array('lang' => $lang));
+                $query = $this->db->get('genero');
                 return $query->result_array();
             }
     

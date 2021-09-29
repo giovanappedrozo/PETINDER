@@ -54,9 +54,12 @@ class Animais_model extends CI_Model {
 
             $status = 1;
 
+            $nome = $this->input->post('nome');
+            $nome = ucfirst(strtolower($nome));
+
             $data = array(
                 'imagem' => $img,
-                'nome' => $this->input->post('nome'),
+                'nome' => $nome,
                 'id_genero' => $this->input->post('genero'),
                 'datanasci' => $this->input->post('data'),
                 'id_raca' => $this->input->post('raca'),
@@ -147,8 +150,11 @@ class Animais_model extends CI_Model {
             if($cast == 'castrado') $cast = TRUE;
             else $cast = FALSE;
 
+            $nome = $this->input->post('nome');
+            $nome = ucfirst(strtolower($nome));
+
             $data = array(
-                'nome' => $this->input->post('nome'),
+                'nome' => $nome,
                 'id_porte' => $this->input->post('porte'),
                 'id_pelagem' => $this->input->post('pelagem'),
                 'especial' => $this->input->post('especial'),
@@ -159,4 +165,42 @@ class Animais_model extends CI_Model {
 
             return $this->db->update('animal',$data,array('id_animal' => $id_animal));        
         } 
+
+        public function get_animal_by_nome($nome){
+            $nome = $this->input->post('nome');
+            $nome = ucfirst(strtolower($nome));
+            
+            $query = $this->db->get_where('animal', array('nome' => $nome));
+            return $query->result_array();
+        }
+
+        public function get_animal_by_especie($id_especie){
+            $query = $this->db->get_where('animal', array('id_especie' => $id_especie));
+            return $query->result_array();
+        }
+
+        public function get_animal_by_genero($id_genero){
+            $query = $this->db->get_where('animal', array('id_genero' => $id_genero));
+            return $query->result_array();
+        }
+
+        public function get_animal_by_raca($id_raca){
+            $query = $this->db->get_where('animal', array('id_raca' => $id_raca));
+            return $query->result_array();
+        }
+
+        public function get_animal_by_porte($id_porte){
+            $query = $this->db->get_where('animal', array('id_porte' => $id_porte));
+            return $query->result_array();
+        }
+
+        public function get_animal_by_pelagem($id_pelagem){
+            $query = $this->db->get_where('animal', array('id_pelagem' => $id_pelagem));
+            return $query->result_array();
+        }
+
+        public function get_animal_by_castrado($castrado){
+            $query = $this->db->get_where('animal', array('castrado' => $castrado));
+            return $query->result_array();
+        }
 }

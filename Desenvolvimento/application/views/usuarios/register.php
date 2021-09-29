@@ -31,7 +31,7 @@
       <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Gender'); ?>">
       <option value="" selected disabled><?php echo $this->lang->line('Gender'); ?></option>
       <?php foreach ($generos as $genero): ?>
-              <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero['genero']; ?></option>
+              <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero[$lang]; ?></option>
       <?php endforeach; ?>
       </select>
     </div>
@@ -46,7 +46,7 @@
   <input type="hidden" name="latitude" id="latitude">
   <input type="hidden" name="longitude" id="longitude">
 
-  <input type="submit" id="submit" class="btn btn-primary btn-block mb-4" name="submit" value="<?php echo $this->lang->line('Title_reg'); ?>">
+  <input type="submit" id="submit" class="btn btn-primary btn-block mb-4 submit" name="submit" value="<?php echo $this->lang->line('Title_reg'); ?>">
   </form>
 </main>
 <script> window.onload = getLocation(); </script>

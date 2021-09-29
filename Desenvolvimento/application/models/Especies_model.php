@@ -10,16 +10,11 @@ class Especies_model extends CI_Model {
         {
             if ($id_especies === FALSE)
             {
-                $lang = $this->session->get_userdata('site_lang');
-                $lang = $lang['site_lang'];
-                if($lang == 'portuguese') $lang = 'pt_BR';
-                else $lang = 'en_US';
-
-                $query = $this->db->get_where('especie', array('lang' => $lang));
+                $query = $this->db->get('especie');
                 return $query->result_array();
             }
       
-            $query = $this->db->get_where('especie', array('especie' => $id_especies));
-            return $query->row_array();
+            $query = $this->db->get_where('especie', array('id_especies' => $id_especies));
+            return $query->result_array();
         }
 }

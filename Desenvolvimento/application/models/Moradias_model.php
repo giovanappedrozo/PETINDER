@@ -10,12 +10,7 @@ class Moradias_model extends CI_Model {
         {
             if ($id_moradia === FALSE)
             {
-                $lang = $this->session->get_userdata('site_lang');
-                $lang = $lang['site_lang'];
-                if($lang == 'portuguese') $lang = 'pt_BR';
-                else $lang = 'en_US';
-
-                $query = $this->db->get_where('moradia', array('lang' => $lang));
+                $query = $this->db->get('moradia');
                 return $query->result_array();
             }
     

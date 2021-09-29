@@ -26,8 +26,7 @@ class Usuarios_model extends CI_Model {
         if(!$query){
             $senha = $this->input->post('senha');
             
-            $options = ['cost' => 12,];
-            $criptografada = password_hash($senha, PASSWORD_BCRYPT, $options);
+            $criptografada = password_hash($senha, PASSWORD_BCRYPT);
 
             $latitude = $this->input->post('latitude');
             $longitude = $this->input->post('longitude');
@@ -36,8 +35,11 @@ class Usuarios_model extends CI_Model {
                 $ponto = "($latitude, $longitude)";
             else $ponto = null;
 
+            $nome = $this->input->post('nome');
+            $nome = ucfirst(strtolower($nome));
+
             $data = array(
-                'nome' => $this->input->post('nome'),
+                'nome' => $nome,
                 'email' => $email,
                 'senha' => $criptografada,
                 'id_genero' => $this->input->post('genero'),
@@ -73,10 +75,23 @@ class Usuarios_model extends CI_Model {
         $this->db->where('email', $email);
         $query = $this->db->get('usuario')->row_array();
         
-        $senhaguardada = isset($query['senha']);
+        if($query){
+            $senhaguardada = $query['senha'];
 
-        if(crypt($senha,$senhaguardada) == $senhaguardada)        
-            return $query;
+            if(crypt($senha,$senhaguardada) == $senhaguardada)        
+                return $query;
+        }
+    }
+
+    function confirm_password($senha) {
+        $query = self::get_usuario($this->session->userdata('id'));
+        
+        if($query){
+            $senhaguardada = $query['senha'];
+
+            if(crypt($senha,$senhaguardada) == $senhaguardada)        
+                return true;
+        }
     }
     
     function logged() {
@@ -85,28 +100,6 @@ class Usuarios_model extends CI_Model {
         if (!isset($logged) || $logged != true) {
             echo 'Voce nao tem permissao para entrar nessa pagina';
             die();
-        }
-    }
-
-    function change_password($postData){
-        $validate = false;
-
-        $oldData = self::get_usuario($this->session->userdata('id'));
-
-        if($oldData['senha'] == md5($postData['currentPassword']))
-            $validate = true;
-
-        if($validate){
-            $data = array(
-                'senha' => md5($postData['newPassword']),
-            );
-            $this->db->where('id_usuario', $this->session->userdata('id'));
-            $this->db->update('usuario', $data);
-
-            return array('status' => 'success', 'message' => '');
-        }
-        else{
-            return array('status' => 'invalid', 'message' => '');
         }
     }
 
@@ -130,24 +123,62 @@ class Usuarios_model extends CI_Model {
 
     public function update_usuario($id_usuario)
     {
-        $senha = $this->input->post('senha');
-            
-        $options = ['cost' => 12,];
-        $criptografada = password_hash($senha, PASSWORD_BCRYPT, $options);
+        $nome = $this->input->post('nome');
+        $nome = ucfirst(strtolower($nome));
 
-        $latitude = $this->input->post('latitude');
-        $longitude = $this->input->post('longitude');
+        if($this->input->post('senha')){
+            $senha = $this->input->post('senha');
+                
+            $options = ['cost' => 12,];
+            $criptografada = password_hash($senha, PASSWORD_BCRYPT, $options);
+        
+            $latitude = $this->input->post('latitude');
+            $longitude = $this->input->post('longitude');
 
-        if($latitude && $longitude)
-            $ponto = "($latitude, $longitude)";
-        else $ponto = null;
+            if($latitude && $longitude){
+                $ponto = "($latitude, $longitude)";
 
-        $data = array(
-            'email' => $this->input->post('email'),
-            'senha' => $criptografada,
-            'localizacao' => $ponto
-        );
+                $data = array(
+                    'nome' => $nome,
+                    'email' => $this->input->post('email'),
+                    'senha' => $criptografada,
+                    'localizacao' => $ponto,
+                    'id_genero' => $this->input->post('genero')
+                );
+            } 
+            else   
+                $data = array(
+                    'nome' => $nome,
+                    'email' => $this->input->post('email'),
+                    'senha' => $criptografada,
+                    'id_genero' => $this->input->post('genero')
+                ); 
+        }  
+        else {
+            $latitude = $this->input->post('latitude');
+            $longitude = $this->input->post('longitude');
 
+            if($latitude && $longitude){
+                $ponto = "($latitude, $longitude)";
+
+                $data = array(
+                    'nome' => $nome,
+                    'email' => $this->input->post('email'),
+                    'localizacao' => $ponto,
+                    'id_genero' => $this->input->post('genero')
+                );
+            }    
+            else   
+                $data = array(
+                    'nome' => $nome,
+                    'email' => $this->input->post('email'),
+                    'id_genero' => $this->input->post('genero')
+                ); 
+        }
+        $session = array(
+            'usuario' => $nome
+            );
+        $this->session->set_userdata($session);
         return $this->db->update('usuario', $data, array('id_usuario' => $id_usuario));        
     } 
 
@@ -156,6 +187,36 @@ class Usuarios_model extends CI_Model {
             $query = $this->db
                 ->where('id_usuario', $id_usuario)
                 ->delete('usuario');
+        }
+    }
+
+    public function get_notificacao_by_animal($id_animal){
+        $this->load->model('animais_model');
+        $animais = $this->animais_model->get_animais($id_animal);
+
+        if($animais){
+            $output = $this->db->get_where('avaliacao_animal', array('id_animal' => $animais['id_animal'], 'status_solicitacao' => 1));       
+
+            return $output;
+        }
+        else
+            show_404();
+    }
+
+    public function verify_animals(){
+        $doador = $this->animais_model->get_animais_by_usuario($this->session->userdata('id'));
+
+        if($doador){
+                $data = array(
+                        'doador' => true
+                );
+                $this->session->set_userdata($data);
+        }
+        else{
+                $data = array(
+                        'doador' => false
+                );
+                $this->session->set_userdata($data);
         }
     }
 }

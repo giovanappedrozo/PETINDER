@@ -1,46 +1,51 @@
-  <!-- <footer class="text-center text-lg-start text-white">
-      <section class="p-3 pt-0">
-        <div class="row d-flex align-items-center">
-          <div class="col-md-7 col-lg-8 text-center text-md-start">
-            <div class="p-3">
-              © 2021
-              <a class="text-white" href="https://petinderapp.azurewebsites.net/"
-                 >petinderapp.azurewebsites.net</a
-                >
-            </div>
-          </div>
+    <script>
+    function load_messages(){
+      $.ajax({
+        url:"<?php echo site_url('mensagens/load_messages'); ?>",
+        method:"POST",
+        data: {action: 'true'},
+        dataType: 'json',
+        success:messages
+      }) 
+    }
 
-          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-facebook-f"></i
-              ></a>
+    function messages(data)
+    {
+      var output = '';
+      if(data.length > 0)
+      {
+        for(var count = 0; count < data.length; count++)
+        {
+          nome = data[count].nome;
+          nome = nome.split(" ", 1);
+          output += '<a href="<?php echo site_url(); ?>/mensagens/'+data[count].id_animal+'/'+data[count].id_usuario+'">'+
+                    '<li class="dropdown-item notification"> <div class="row">'+
+                    '<div class="col-4"><p class="font-weight-bold msg">'+nome+' - '+data[count].animal+'</p>'+
+                    '<p class="text-sm-left msg">'+data[count].conteudo+'</p></div>'+
+                    '</div></li></a>';
+        }
+      }
+      else
+      {
+        output += '<div align="center"><b><?php echo $this->lang->line('No_message'); ?></b></div>';
+      }
 
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-twitter"></i
-              ></a>
+      $('#message_area').html(output);
+    }    
 
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-google"></i
-              ></a>
+    function matches(){
+      $.ajax({
+        url:"<?php echo site_url('mensagens/load_messages'); ?>",
+        method:"POST",
+        data: {action: 'true'},
+        dataType: 'json',
+        success:messages
+      }) 
+    }
 
-            <a
-               class="btn btn-outline-light btn-floating m-1"
-               class="text-white"
-               role="button"
-               ><i class="fab fa-instagram"></i
-              ></a>
-          </div>
-        </div>
-      </section>
-  </footer> -->
+    $('#chat_area').animate({
+      scrollTop: $(this).height() 
+    }, 300);
+    </script>
   </body>
 </html>

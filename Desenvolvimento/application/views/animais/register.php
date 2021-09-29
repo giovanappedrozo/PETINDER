@@ -3,7 +3,7 @@
         <?php echo form_open_multipart('animais/register');?>
 
         <div class="form-outline mb-4">
-                <label for="img" class="form-label"><?php echo $this->lang->line('Add_photo'); ?>: </label><br>
+                <label for="img" class="form-label form-radio"><?php echo $this->lang->line('Add_photo'); ?>: </label><br>
                 <input type="file" name='profile_pic' accept=".jpeg,.jpg,.png,.gif" class="form-control form-control" id="img" required>
         </div>
 
@@ -16,7 +16,7 @@
                 <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Sex'); ?>" required>
                 <option value="" selected disabled><?php echo $this->lang->line('Sex'); ?></option>
                 <?php foreach ($generos as $genero): ?>
-                        <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero['genero']; ?></option>
+                        <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero[$lang]; ?></option>
                 <?php endforeach; ?>
                 </select>
         </div>
@@ -33,7 +33,7 @@
                 <select name="especie" id="especie" onchange="change();" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
                 <option value="" selected disabled><?php echo $this->lang->line('Species'); ?></option>
                 <?php foreach ($especies as $especie): ?>
-                        <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie['especie']; ?></option>
+                        <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie[$lang]; ?></option>
                 <?php endforeach; ?>
                 </select>
         </div>
@@ -44,11 +44,11 @@
                 <option disabled value=""><?php echo " ------------------------------------------------------------------------------------------------------------ ".$this->lang->line("Breed_dog")." -----------------------------------------------------------------------------------------------------------";?></option>
                 <?php foreach ($racas as $raca): 
                         if($raca['raca'] == 'Yorkshire Terrier'){ ?>
-                        <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca['raca']; ?></option>
+                        <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca[$lang]; ?></option>
                         <option disabled value=""><?php echo " ------------------------------------------------------------------------------------------------------------ ".$this->lang->line("Breed_cat")." -----------------------------------------------------------------------------------------------------------";?></option>
                         <?php } 
                         else{ ?>
-                                <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca['raca']; ?></option>
+                                <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca[$lang]; ?></option>
                 <?php }endforeach; ?>
                 </select>
         </div>
@@ -57,7 +57,7 @@
                 <select name="porte" id="porte" class="form-select" placeholder="<?php echo $this->lang->line('Size'); ?>" required>
                 <option value="" selected disabled><?php echo $this->lang->line('Size'); ?></option>
                 <?php foreach ($portes as $porte): ?>
-                        <option value="<?php echo $porte['id_porte']; ?>"><?php echo $porte['porte']; ?></option>
+                        <option value="<?php echo $porte['id_porte']; ?>"><?php echo $porte[$lang]; ?></option>
                 <?php endforeach; ?>
                 </select>
         </div>
@@ -66,12 +66,12 @@
                 <select name="pelagem" id="pelagem" class="form-select" placeholder="<?php echo $this->lang->line('Coat'); ?>" required>
                 <option value="" selected disabled><?php echo $this->lang->line('Coat'); ?></option>
                 <?php foreach ($pelagens as $pelagem): ?>
-                        <option value="<?php echo $pelagem['id_pelagem']; ?>"><?php echo $pelagem['pelagem']; ?></option>
+                        <option value="<?php echo $pelagem['id_pelagem']; ?>"><?php echo $pelagem[$lang]; ?></option>
                 <?php endforeach; ?>
                 </select>
         </div>
 
-        <div class="form-outline mb-4">
+        <div class="form-outline mb-4 form-radio">
                 <label for="check" class="form-label"><?php echo $this->lang->line('Special'); ?></label><br>
                 <div class="form-check" id="check">
                 <input class="form-check-input" type="radio" name="especial" id="espSim" value="TRUE" required>
@@ -92,12 +92,12 @@
                 <select name="temperamento" id="temperamento" class="form-select" placeholder="<?php echo $this->lang->line('Temperament'); ?>" required>
                 <option value="" selected disabled><?php echo $this->lang->line('Temperament'); ?></option>
                 <?php foreach ($temperamentos as $temperamento): ?>
-                        <option value="<?php echo $temperamento['id_temperamento']; ?>"><?php echo $temperamento['temperamento']; ?></option>
+                        <option value="<?php echo $temperamento['id_temperamento']; ?>"><?php echo $temperamento[$lang]; ?></option>
                 <?php endforeach; ?>
                 </select>
         </div>
 
-        <div class="form-check">
+        <div class="form-check form-radio">
                 <input class="form-check-input" type="checkbox" value="castrado" id="castrado" name="castrado">
                 <label class="form-check-label" for="castrado">
                         <?php echo $this->lang->line('Castrated'); ?>
@@ -111,7 +111,7 @@
 
         <input type="hidden" name="doador" value="<?php echo $this->session->userdata("id"); ?>">
 
-        <input type="submit" name="submit" class="btn btn-primary btn-block mb-4" value="<?php echo $this->lang->line('Submit'); ?>">
+        <input type="submit" name="submit" class="btn btn-primary btn-block mb-4 submit" value="<?php echo $this->lang->line('Submit'); ?>">
 
         </form>
 </main>

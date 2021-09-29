@@ -10,12 +10,7 @@ class Horas_sozinho_model extends CI_Model {
         {
             if ($id_horas === FALSE)
             {
-                $lang = $this->session->get_userdata('site_lang');
-                $lang = $lang['site_lang'];
-                if($lang == 'portuguese') $lang = 'pt_BR';
-                else $lang = 'en_US';
-
-                $query = $this->db->get_where('horassozinho', array('lang' => $lang));
+                $query = $this->db->get('horassozinho');
                 return $query->result_array();
             }
     
