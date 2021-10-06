@@ -9,7 +9,6 @@ function showPosition(position){
 function showError(error){
   switch(error.code) {
     case error.PERMISSION_DENIED:
-      window.alert("Usuário rejeitou a solicitação de Geolocalização.");
       check = document.getElementById('localizacao');
       check.checked = false;
       break;
@@ -31,3 +30,11 @@ function getLocation(){
   }
   else{x.innerHTML="Seu browser não suporta Geolocalização.";}
 }
+
+$('#chat_area').animate({
+  scrollTop: $(this).height() 
+}, 300);
+
+setInterval(function(){
+  load_notifications();
+}, 1000);

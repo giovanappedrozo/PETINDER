@@ -25,6 +25,12 @@ main{
 .col{
     color: rgb(186, 48, 48) !important;
 }
+
+.btn-primary-0{
+    background-color: none !important;
+    border: 1px solid rgb(186, 48, 48) !important;
+    color: rgb(186, 48, 48) !important;
+}
  
 .btn-primary, .btn-secondary{
     background-color: rgb(186, 48, 48) !important;
@@ -145,6 +151,10 @@ main{
     display: none;
 }
 
+.adopted{
+    margin: 20px;
+}
+
 .text-lg-center{
     text-align: center;
 }
@@ -156,6 +166,23 @@ main{
 
 .pointer{
     cursor: pointer;
+}
+
+.denuncia{
+    margin: 0;
+    padding: 2px !important;
+}
+
+.green-ball{
+    height: 7px;
+    width: 7px;
+    background-color: rgb(60, 216, 29);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.btn-denuncia{
+    width: 100% !important;
 }
 
 .float-end{
@@ -213,6 +240,14 @@ main{
     color: rgb(186, 48, 48);
 }
 
+.green{
+    color: rgb(44, 155, 50);
+}
+
+.orange{
+    color: rgb(199, 137, 22);
+}
+
 .red:hover{
     color: rgb(186, 48, 48);
     opacity: 90%;
@@ -222,6 +257,10 @@ main{
     height: 300px;
     overflow-y: scroll;
 } 
+
+.patinha{
+    width: 30px;
+}
 
 .search{
     height: 40px;
