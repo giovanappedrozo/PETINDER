@@ -30,8 +30,8 @@
         
 
         <div class="form-outline mb-4">
-                <select name="especie" id="especie" onchange="change();" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
-                <option value="" selected disabled><?php echo $this->lang->line('Species'); ?></option>
+                <select name="especie" onchange="racas();" id="reg-especie" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>" required>
+                <option selected disabled><?php echo $this->lang->line('Species'); ?></option>
                 <?php foreach ($especies as $especie): ?>
                         <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie[$lang]; ?></option>
                 <?php endforeach; ?>
@@ -39,19 +39,10 @@
         </div>
 
         <div class="form-outline mb-4">
-                <select name="raca" id="raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>" required >
-                <option value="" selected disabled><?php echo $this->lang->line('Breed'); ?></option>
-                <option disabled value=""><?php echo " ------------------------------------------------------------------------------------------------------------ ".$this->lang->line("Breed_dog")." -----------------------------------------------------------------------------------------------------------";?></option>
-                <?php foreach ($racas as $raca): 
-                        if($raca['raca'] == 'Yorkshire Terrier'){ ?>
-                        <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca[$lang]; ?></option>
-                        <option disabled value=""><?php echo " ------------------------------------------------------------------------------------------------------------ ".$this->lang->line("Breed_cat")." -----------------------------------------------------------------------------------------------------------";?></option>
-                        <?php } 
-                        else{ ?>
-                                <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca[$lang]; ?></option>
-                <?php }endforeach; ?>
+                <select name="raca" id="reg-raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>" required >
+                        <option value="" selected disabled><?php echo $this->lang->line('Breed'); ?></option>
                 </select>
-        </div>
+        </div>        
 
         <div class="form-outline mb-4">
                 <select name="porte" id="porte" class="form-select" placeholder="<?php echo $this->lang->line('Size'); ?>" required>

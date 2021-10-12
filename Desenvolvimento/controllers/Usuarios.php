@@ -108,69 +108,14 @@ class Usuarios extends CI_Controller {
                 }
         }
 
-        public function confirm_register(){
-                $config = array(
-                        'protocol' => 'smtp', // 'mail', 'sendmail', or 'smtp'
-                        'smtp_host' => 'smtp.gmail.com', 
-                        'smtp_port' => 465,
-                        'smtp_user' => 'grupo6pds@gmail.com',
-                        'smtp_pass' => 'socorrodeus',
-                        'smtp_crypto' => 'ssl', //can be 'ssl' or 'tls' for example
-                        'mailtype' => 'text', //plaintext 'text' mails or 'html'
-                        'smtp_timeout' => '4', //in seconds
-                        'charset' => 'utf-8',
-                        'wordwrap' => TRUE,
-                        'validate' => TRUE,
-                        'mailtype' => 'html',
-                        'newline' => '\r\n'
-                );
-          
-        
-                $this->load->library('email', $config);
-                
-                $from = $this->config->item('smtp_user');
-                $to = 'gippedrozo@gmail.com';
-                $subject = $this->lang->line('Email_conf');
-                $message = '<p style="text-align:center;">'.$this->lang->line('Email_conf_msg').'<br>'.site_url('usuarios/confirmation/').
-                '<br>'.$this->lang->line('Email_conf_wrong').'</p>';
-
-                $this->email->set_newline("\r\n");
-                $this->email->from($from);
-                $this->email->to($to);
-                $this->email->subject($subject);
-                $this->email->message($message);
-
-                if ($this->email->send()) {
-                echo 'Your Email has successfully been sent.';
-                } else {
-                show_error($this->email->print_debugger());
-                }
-        }
-
         public function recover_password(){
                 if($this->input->post('action')){
                         $query = $this->usuarios_model->verify_email($this->input->post('action'));
                         if($query){
-                                $config = array(
-                                        'protocol' => 'smtp', 
-                                        'smtp_host' => 'smtp.gmail.com', 
-                                        'smtp_port' => 465,
-                                        'smtp_user' => 'grupo6pds@gmail.com',
-                                        'smtp_pass' => 'socorrodeus',
-                                        'smtp_crypto' => 'ssl', 
-                                        'mailtype' => 'text', 
-                                        'smtp_timeout' => '4', 
-                                        'charset' => 'utf-8',
-                                        'wordwrap' => TRUE,
-                                        'validate' => TRUE,
-                                        'mailtype' => 'html',
-                                        'newline' => '\r\n'
-                                );
 
                                 $this->load->library('email', $config);
                                 
-                                $from = $this->config->item('smtp_user');
-                                $to = 'gippedrozo@gmail.com';
+                                $to = $this->input->post('action');
 
                                 $token = $to.rand(1, 999999999);
                                 $token = password_hash($token, PASSWORD_DEFAULT);
@@ -184,13 +129,18 @@ class Usuarios extends CI_Controller {
                                 
 
                                 $this->email->set_newline("\r\n");
-                                $this->email->from($from);
+                                $this->email->from('grupo6pds@gmail.com', 'PETINDER');
                                 $this->email->to($to);
                                 $this->email->subject($subject);
                                 $this->email->message($message);
 
-                                $this->email->send();
+                                if($this->email->send())
+                                   $this->session->set_flashdata("success", $this->lang->line("Verify_recover"));
+                                else
+                                   $this->session->set_flashdata("danger", $this->lang->line("Error"));
                         }
+                        else
+                                echo $this->session->set_flashdata("danger", $this->lang->line("Wrong_email")."<a href='".site_url('usuarios/register')."'>".$this->lang->line("Here")."</a>");
                 }
 
         }
@@ -200,14 +150,14 @@ class Usuarios extends CI_Controller {
 
                 if($query){
                         $datacriacao =  new DateTime($query['datahora']);
-                        $dataatual = new DateTime (date('Y-m-d'));
+                        $dataatual = new DateTime();
 
                         $datediff = $datacriacao->diff($dataatual);
 
                         $data['email'] = $query['email'];
                         $data['title'] = $this->lang->line('Recover_title');
 
-                        if($datediff->days <= 1){
+                        if($datediff->h <= 24){
                                 $this->resetPassword_model->delete_token($query['id_reset']);
 
                                 $this->load->view('templates/header', $data);
@@ -338,7 +288,7 @@ class Usuarios extends CI_Controller {
                         $animal = $this->animais_model->get_animais($match['id_animal']);
 
                         if($match && $animal['id_status'] != 3){
-                                $usuarios = $this->usuarios_model->get_usuario($match['id_usuario']);
+                                $usuarios = $this->usuarios_model->get_usuario($animal['id_doador']);
 
                                 $data['conversas'][] = array(
                                         'id_usuario' => $usuarios['id_usuario'],
@@ -380,7 +330,7 @@ class Usuarios extends CI_Controller {
                 $data['animais'] = NULL;
                 $data['dislike'] = TRUE;
 
-                $data['title'] = $this->lang->line('My_deslikes');  
+                $data['title'] = $this->lang->line('Interactions');  
                 $this->load->view('templates/header', $data);
                 $this->load->view('usuarios/my_dislikes', $data);
                 $this->load->view('templates/footer');              
@@ -410,7 +360,7 @@ class Usuarios extends CI_Controller {
                 $data['animais'] = NULL;
                 $data['like'] = TRUE;
 
-                $data['title'] = $this->lang->line('My_deslikes');  
+                $data['title'] = $this->lang->line('Interactions');  
                 $this->load->view('templates/header', $data);
                 $this->load->view('usuarios/my_likes', $data);
                 $this->load->view('templates/footer');              
@@ -524,22 +474,24 @@ class Usuarios extends CI_Controller {
                 
                 $output = array();
                 if($doador){
-                        foreach($animais as $animal){
-                                        $matches = $this->avaliacao_animal_model->get_match_by_animal($animal['id_animal']);
-                                        
-                                foreach($matches as $match){
-                                        if($match && $animal['id_status'] != 3){
-                                                $usuarios = $this->usuarios_model->get_usuario($match['id_usuario']);
-        
-                                                $output[] = array(
-                                                        'id_usuario' => $usuarios['id_usuario'],
-                                                        'nome' => $usuarios['nome'], 
-                                                        'id_animal' => $match['id_animal'],
-                                                        'animal' => $animal['nome'],
-                                                        'id_doador' => $animal['id_doador']
-                                                );
-                                        }
-                                }   
+                        if($animais){
+                                foreach($animais as $animal){
+                                                $matches = $this->avaliacao_animal_model->get_match_by_animal($animal['id_animal']);
+                                                
+                                        foreach($matches as $match){
+                                                if($match && $animal['id_status'] != 3){
+                                                        $usuarios = $this->usuarios_model->get_usuario($match['id_usuario']);
+                
+                                                        $output[] = array(
+                                                                'id_usuario' => $usuarios['id_usuario'],
+                                                                'nome' => $usuarios['nome'], 
+                                                                'id_animal' => $match['id_animal'],
+                                                                'animal' => $animal['nome'],
+                                                                'id_doador' => $animal['id_doador']
+                                                        );
+                                                }
+                                        }   
+                                }
                         }
                 }
                 else{
@@ -640,8 +592,11 @@ class Usuarios extends CI_Controller {
 
                 if($usuario['qtdmoradores'] != null){
                         sleep(1);
-                        $animal = $this->usuarios_model->perfect_match($usuario);
-                        redirect('animais/view/'.$animal);
+                        $animais = $this->usuarios_model->perfect_match();
+
+                        $animal = array_rand($animais, 1);
+
+                        redirect('animais/view/'.$animais[$animal]['id_animal']); 
                 }
                 else
                         redirect('usuarios/application');
@@ -652,7 +607,8 @@ class Usuarios extends CI_Controller {
                 if($denuncias && sizeof($denuncias) >= 2){
                         $this->usuarios_model->banir($denunciado);
                 }
-                self::notify_ban();
+                $usuario = $this->usuarios_model->get_usuario($denunciado);
+                self::notify_ban($usuario['email']);
                 $this->denuncias_model->set_denuncia($denunciante, $denunciado, $denuncia);
                 $doador = $this->animais_model->get_animais($animal);
                 if($doador['id_doador'] == $denunciante)
@@ -663,36 +619,56 @@ class Usuarios extends CI_Controller {
                 redirect('animais');
         }
 
-        public function notify_ban(){
-                $config = array(
-                        'protocol' => 'smtp', 
-                        'smtp_host' => 'smtp.gmail.com', 
-                        'smtp_port' => 465,
-                        'smtp_user' => 'grupo6pds@gmail.com',
-                        'smtp_pass' => 'socorrodeus',
-                        'smtp_crypto' => 'ssl', 
-                        'mailtype' => 'text', 
-                        'smtp_timeout' => '4', 
-                        'charset' => 'utf-8',
-                        'wordwrap' => TRUE,
-                        'validate' => TRUE,
-                        'mailtype' => 'html',
-                );
+        public function notify_ban($email){
 
                 $this->load->library('email', $config);
                 
-                $from = $this->config->item('smtp_user');
-                $to = 'gippedrozo@gmail.com';
+                $to = $email;
                 $subject = $this->lang->line('Suspended_account');
                 $message = '<h2>'.$this->lang->line('Suspended_account').'</h2><p">'.$this->lang->line('Sa_message').'</p>';
 
                 $this->email->set_newline("\r\n");
-                $this->email->from($from);
+                $this->email->from('grupo6pds@gmail.com', 'PETINDER');
                 $this->email->to($to);
                 $this->email->subject($subject);
                 $this->email->message($message);
 
                 $this->email->send();
+        }
+
+        public function verify_notifications(){
+                if($this->session->userdata('logged')){
+                        $likes = self::load_like();
+                        $match_donor = self::load_match($this->session->userdata('id'));
+                        $match_adopter = self::load_match();
+
+                        if($match_donor){
+                                foreach($match_donor as $match){
+                                        $animal = $this->animais_model->get_animais($match['id_animal']);
+                                        $mensagens  = $this->mensagens_model->get_mensagem($match['id_usuario'], $animal, $match['id_doador']);
+                                        $result = 'FALSE';
+                                        if(!$mensagens){
+                                                $result = 'TRUE';
+                                        }
+                                }
+                                if($result == 'TRUE')
+                                        echo 'TRUE';
+                        }
+                        elseif($match_adopter){
+                                foreach($match_adopter as $match){
+                                        $animal = $this->animais_model->get_animais($match['id_animal']);
+                                        $mensagens  = $this->mensagens_model->get_mensagem($match['id_usuario'], $animal, $match['id_doador']);
+                                        $result = 'FALSE';
+                                        if(!$mensagens){
+                                                $result = 'TRUE';
+                                        }
+                                }
+                                if($result == 'TRUE')
+                                        echo 'TRUE';
+                        }
+                        elseif($likes)
+                                echo 'TRUE';
+                }
         }
 
 }

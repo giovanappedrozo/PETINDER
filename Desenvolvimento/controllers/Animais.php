@@ -66,6 +66,26 @@ class Animais extends CI_Controller {
                 $this->load->view('templates/footer');
         }
 
+        public function select_racas(){
+                if($this->input->post('especie')){
+                        $racas = $this->racas_model->get_raca($this->input->post('especie'));
+
+                        $output = array(array('id_raca' => '', 'raca' => $this->lang->line('Breed')));
+                        if($this->session->userdata('site_lang') == 'portuguese') $lang = 'pt_br';
+                        else $lang = 'en_us';
+
+                        if($racas){
+                                foreach($racas as $raca){
+                                        $output[] = array(
+                                        'id_raca'  => $raca['id_raca'],
+                                        'raca' => $raca[$lang]
+                                        );
+                                }
+                                echo json_encode($output);
+                        }
+                }
+        }
+
         public function delete_dislike($animais, $dislikes){
                 foreach($dislikes as $dislike){
                         foreach($animais as $a){
@@ -98,6 +118,7 @@ class Animais extends CI_Controller {
                 $data['portes'] = $this->portes_model->get_porte();
                 $data['pelagens'] = $this->pelagens_model->get_pelagem();
                 $data['temperamentos'] = $this->temperamentos_model->get_temperamento();
+                $data['queue'] = self::queue($id_animal);
 
 
                 if (empty($data['animal']))
@@ -179,7 +200,7 @@ class Animais extends CI_Controller {
                                 redirect('animais/view/'.$this->input->post('id_animal'));
 
                         }
-                        else{  
+                        else{   
                                 if($usuario['qtdmoradores'] != NULL){
                                         $likes = $this->avaliacao_animal_model->get_avaliacao_by_usuario($this->session->userdata('id'), 'TRUE', $this->input->post('id_animal'));
 
@@ -227,8 +248,22 @@ class Animais extends CI_Controller {
                 $data['temperamentos'] = $this->temperamentos_model->get_temperamento();
 
                 $this->form_validation->set_rules('nome', 'nome', 'required');
+                $img = 'FALSE';
 
-                if ($this->form_validation->run() === FALSE)
+                if($_FILES('profile_pic')){
+                    $config['upload_path'] = './assets/fotos';
+                    $config['allowed_types'] = 'jpeg|jpg|png|gif';
+                    $config['file_name'] = md5(uniqid(time()));
+
+                    $this->load->library('upload', $config);
+
+
+                    $this->upload->do_upload('profile_pic');
+                    $img = 'TRUE';
+                }
+
+
+                if (($this->form_validation->run() === FALSE))
                 {
                         $this->load->view('templates/header', $data);
                         $this->load->view('animais/edit', $data);
@@ -237,7 +272,7 @@ class Animais extends CI_Controller {
                 }
                 else
                 {
-                        $this->animais_model->update_animal($id_animal);
+                        $this->animais_model->update_animal($id_animal, $img);
                         redirect('usuarios/my_animals', 'refresh');
                 }
         }
@@ -272,9 +307,15 @@ class Animais extends CI_Controller {
 
                 if($animal['id_adotante'] == $this->session->userdata('id')){
                         $this->animais_model->reset_animal($animal);
+                        redirect('usuarios/my_animals');
                 }
                 else
                         redirect('usuarios/login');
         }
 
+        public function queue($id_animal){
+                $avaliacoes = $this->avaliacao_animal_model->get_avaliacao_by_animal($id_animal);
+                
+                return sizeof($avaliacoes)-1;
+        }
 }

@@ -1,4 +1,4 @@
-%% Adaptado a partir de :
+% Adaptado a partir de :
 %%    abtex2-modelo-trabalho-academico.tex, v-1.9.2 laurocesar
 %% para ser um modelo para os trabalhos no IFSP-SPO
 
@@ -42,7 +42,7 @@ GIOVANA PAZ PEDROZO & SP185089X \\
 
 \preambulo{Trabalho apresentado à disciplina de Prática de Desenvolvimento de Sistemas do curso técnico em informática integrado ao ensino médio do Instituto Federal de São Paulo, como requisito principal para obtenção da aprovação na disciplina.}
 
-\data{22 DE SETEMBRO DE 2021}
+\data{06 DE OUTUBRO DE 2021}
 
 \renewcommand{\orientadorname}{Professor:}
 \orientador{IVAN FRANCOLIN MARTINEZ}
@@ -76,6 +76,7 @@ GIOVANA PAZ PEDROZO & SP185089X \\
 \IfPackageLoaded{biblatex}{%
 \addbibresource{referencias.bib}
 \addbibresource{abntex2-doc-abnt-6023.bib}
+
 }{}
 
 % Início do documento
@@ -86,10 +87,7 @@ GIOVANA PAZ PEDROZO & SP185089X \\
 \frenchspacing 
 
 % -- lista de pendencias gerada pelo todonotes
-% -- altere opções do usepackage para remover na versão final....
-\listoftodos
-\todo[inline]{remover lista de todo da versão final...}
-\newpage
+% -- altere opções do usepackage para remover na versão final...
 
 % ----------------------------------------------------------
 % ELEMENTOS PRÉ-TEXTUAIS
@@ -156,11 +154,9 @@ GIOVANA PAZ PEDROZO & SP185089X \\
 \cleardoublepage
 % ---
 
-%\input{pre-siglas}
+\input{pre-siglas}
 
 %\input{pre-simbolos}
-\todo[inline]{Remover lista de simbolos se não for necessário}
-
 
 % ---
 % inserir o sumario
@@ -194,9 +190,7 @@ GIOVANA PAZ PEDROZO & SP185089X \\
 % Referências bibliográficas
 % ----------------------------------------------------------
 % quando não esta utilizando biblatex tem que carregar as referencias aqui
-\IfPackageLoaded{biblatex}{}{%
-\bibliography{referencias,exemplos/abntex2-doc-abnt-6023}
-}
+\bibliography{referencias.bib,abntex2-doc-abnt-6023.bib}
 
 \input{pos-glossario.tex}
 
@@ -214,7 +208,6 @@ GIOVANA PAZ PEDROZO & SP185089X \\
 %---------------------------------------------------------------------
 \phantompart
 \printindex
-\todonum[inline]{remover indice remissivo se não for necessário}
 
 %---------------------------------------------------------------------
 

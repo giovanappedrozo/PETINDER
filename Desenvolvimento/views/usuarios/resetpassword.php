@@ -20,22 +20,6 @@
     <button type="submit" class="btn btn-primary btn-block mb-4 submit"><?php echo $this->lang->line('Submit'); ?></button>
     <div class="text-center">
                 <p><?php echo $this->lang->line('Wo_register'); ?> <a class="col" href="<?php echo site_url("usuarios/register"); ?>"><?php echo $this->lang->line('Title_reg'); ?></a></p>
-                <p>or sign up with:</p>
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                <i class="fab fa-facebook-f"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                <i class="fab fa-google"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                <i class="fab fa-twitter"></i>
-                </button>
-
-                <button type="button" class="btn btn-primary btn-floating mx-1">
-                <i class="fab fa-github"></i>
-                </button>
             </div>
     </form>
 </main>

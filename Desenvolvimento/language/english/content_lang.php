@@ -146,3 +146,6 @@ $lang['Type_email'] = 'Type your email address';
 $lang['Error'] = 'An unexpected error has occurred. Try again later.';
 $lang['Passwd_recovered'] = "Password reset successfully!";
 $lang['Reset_passwd_msg'] = "Hi! if you have requested to change your account password, access the link:<br>";
+$lang['Queue'] = "Queue";
+$lang["Wrong_email"] = "The email address is incorrect. Please, try again or register ";
+$lang['Rehome_pet'] = "Put back for adoption";

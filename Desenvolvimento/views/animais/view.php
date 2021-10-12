@@ -1,7 +1,5 @@
 <main class="container vh-100">
-  <div class="container py-5 h-100">
     <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-12 col-xl-4">
         <div class="card">
           <div class="card-body text-center">
             <div class="mb-4">
@@ -27,18 +25,22 @@
               echo $animal['nome'].', '.$idade; ?>
             </h4>
 
-            <p class="text-muted mb-4"><?php 
-            echo $dataNascimento->format('d/m/Y'); ?>
-            <?php 
-              if($distance && ($this->session->userdata('id') != $animal['id_doador'])){
-              foreach($distance as $d): ?>
-                <span class="mx-2">|</span><i class="bi bi-geo-alt-fill"></i>&nbsp;
-                <?php $l = (pi() * 6371 * $d) / 180;
-                if($this->session->userdata('site_lang') == 'portuguese') echo round($l, 1).' km';
-                else { $l = $l / 1.6; echo round($l, 1).' mi'; } ?>
-              <?php endforeach; } ?>
-              <span class="mx-2">|</span>&nbsp;<span class="<?php if($animal['id_status'] == 1) echo 'green'; elseif($animal['id_status'] == 2) echo 'orange'; else echo 'red'; ?>"><?php foreach($status as $st){
-                if($st['id_status'] == $animal['id_status']) echo $st[$lang]; }?></span></p>
+            <p class="text-muted mb-4 view">
+              <?php echo $dataNascimento->format('d/m/Y'); ?></p>
+              <p class='view'><?php if($distance && ($this->session->userdata('id') != $animal['id_doador'])){
+                foreach($distance as $d): ?>
+                  <span class="mx-2 barra">|</span><i class="bi bi-geo-alt-fill"></i>&nbsp;
+                  <?php $l = (pi() * 6371 * $d) / 180;
+                  if($this->session->userdata('site_lang') == 'portuguese') echo round($l, 1).' km';
+                  else { $l = $l / 1.6; echo round($l, 1).' mi'; }
+                endforeach; 
+              } ?></p>
+              <p class='view'><span class="mx-2 barra">|</span>&nbsp;<span class="<?php if($animal['id_status'] == 1) echo 'green'; elseif($animal['id_status'] == 2) echo 'orange'; else echo 'red'; ?>">
+                <?php foreach($status as $st){
+                  if($st['id_status'] == $animal['id_status']) echo $st[$lang]; }?></span></p>
+                <?php if($animal['id_status'] == 2){ ?>
+                  <p class='view'><span class="mx-2 barra">|</span>&nbsp;<span class="text-muted mb-4"><?php echo $this->lang->line('Queue').": ".$queue;?></span></p>
+                <?php } ?><br><br>
 
             <?php if($animal['id_doador'] != $this->session->userdata('id') && $animal['id_status'] != 3){ ?>
 
@@ -57,9 +59,9 @@
 
             <hr />
 
-              <div class="d-flex justify-content-between text-center mb-2">
+              <div class="justify-content-between text-center mb-2 application">
                 <div>
-                  <p class="mb-2 h5"><?php echo $this->lang->line('Breed'); ?>:</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Breed'); ?>:</p>
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($racas as $raca){
@@ -69,7 +71,7 @@
                   </p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5"><?php echo $this->lang->line('Sex'); ?>:</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Sex'); ?>:</p>
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($generos as $genero){
@@ -78,7 +80,7 @@
                   </p>
                 </div>
                 <div>
-                  <p class="mb-2 h5"><?php echo $this->lang->line('Size'); ?>:</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Size'); ?>:</p>
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($portes as $porte){
@@ -88,7 +90,7 @@
                   </p>
                 </div>
                 <div>
-                  <p class="mb-2 h5"><?php echo $this->lang->line('Coat'); ?>:</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Coat'); ?>:</p>
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($pelagens as $pelagem){
@@ -101,9 +103,9 @@
 
               <hr/>
               
-              <div class="d-flex justify-content-between text-center mb-2">
+              <div class="justify-content-between text-center mb-2 application">
                 <div>
-                  <p class="mb-2 h5"><?php echo $this->lang->line('Temper'); ?>:</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Temper'); ?>:</p>
                   <p class="text-muted mb-0">
                     <?php 
                     foreach($temperamentos as $temperamento){
@@ -113,22 +115,23 @@
                   </p>
                 </div>
                 <div>
-                  <p class="mb-2 h5"><?php echo $this->lang->line("Castrated"); ?>:</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line("Castrated"); ?>:</p>
                   <p class="text-muted mb-0">
                     <?php if($animal['castrado'] == TRUE) echo $this->lang->line('Yes');
                           else echo $this->lang->line('No'); ?></p>
                 </div>
                 <div>
-                  <p class="mb-2 h5"><?php echo $this->lang->line("Special_line"); ?>:</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line("Special_line"); ?>:</p>
                   <p class="text-muted mb-0">
                     <?php if($animal['especial'] == TRUE) echo $this->lang->line('Yes');
                           else echo $this->lang->line('No'); ?></p>
                 </div>
                 <div>
-                  <p class="mb-2 h5"><?php echo $this->lang->line("About_animal"); ?></p>
-                  <p class="text-muted mb-0">
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line("About_animal"); ?></p>
+                  <p class="text-muted mb-0 info-adic">
                     <?php if($animal['infoadicional']) echo $animal['infoadicional'];
                           else echo "—"; ?></p>
                 </div>
               </div>
+           </div>
 </main>

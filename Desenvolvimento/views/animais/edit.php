@@ -2,6 +2,11 @@
         <?php echo validation_errors(); ?>
         <?php echo form_open_multipart('animais/edit/'.$animal['id_animal']);?>
 
+        <div class="form-outline mb-4">
+                <label for="img" class="form-label form-radio"><?php echo $this->lang->line('Add_photo'); ?>: </label><br>
+                <input type="file" name='profile_pic' accept=".jpeg,.jpg,.png,.gif" class="form-control form-control" id="img">
+        </div>
+
         <div class="form-floating mb-4">
                 <input type="text" id="nome" name="nome" class="form-control" value="<?php echo $animal['nome']; ?>">
                 <label for="nome"><?php echo $this->lang->line('Name_pet'); ?></label>
@@ -11,7 +16,7 @@
               echo $this->lang->line('BirthDate').': '.$dataNascimento->format('d/m/Y'); ?></p>
 
         <div class="form-outline mb-4">
-            <label for="genero" class="form-radio"><?php echo $this->lang->line('Gender'); ?>:</label>
+            <label for="genero" class="form-radio"><?php echo $this->lang->line('Sex'); ?>:</label>
                 <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Sex'); ?>" disabled>
                 <?php foreach ($generos as $genero): 
                     if($genero['id_genero'] == $animal['id_genero']){?>

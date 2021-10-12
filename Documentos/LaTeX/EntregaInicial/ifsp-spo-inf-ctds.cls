@@ -8,7 +8,7 @@
 \ProcessOptions\relax
 \LoadClass{ifsp-spo-inf}
 
-\curso{Tecnologia em Análise e Desenvolvimento de Sistemas}
+\curso{Técnico em Informática Integrado ao Ensino Médio}
 
 \instituicao{%
   \imprimirifsp

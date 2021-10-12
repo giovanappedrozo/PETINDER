@@ -25,7 +25,7 @@
                                 <a href="<?php echo site_url('animais/view/'.$animal['id_animal']); ?>" class="text-dark">
                                         <h4><?php echo $animal['nome']; ?></h4>
                                 <?php if($animal['id_adotante'] == $this->session->userdata('id')){ ?>
-                                        <br><a href="<?php echo site_url('animais/back_to_adoption/'.$animal['id_animal']); ?>" class="red">Recolocar para adocao</a>&nbsp;
+                                        <br><a href="<?php echo site_url('animais/back_to_adoption/'.$animal['id_animal']); ?>" class="red"><?php echo $this->lang->line('Rehome_pet'); ?></a>&nbsp;
                                 <?php } ?>
                                 </a>
                         </div>

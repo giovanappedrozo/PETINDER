@@ -36,5 +36,34 @@ $('#chat_area').animate({
 }, 300);
 
 setInterval(function(){
+  load_not_msg();
+}, 1000);
+
+setInterval(function(){
   load_notifications();
 }, 1000);
+
+function racas(){
+  var especie = $("#reg-especie option:selected").val();
+  $.ajax({
+          url:"https://petinderapp.azurewebsites.net/index.php/animais/racas",
+          method:"POST",
+          data: {especie: especie},
+          dataType: 'json',
+          success:function(data){
+                  var output = '';
+                  if(data.length > 0)
+                  {
+                    console.log();
+                          for(var count = 0; count < data.length; count++)
+                          {
+                            if(count == 0 && window.location.href == 'https://petinderapp.azurewebsites.net/index.php/animais/register')
+                              output += '<option value="'+data[count].id_raca+'" disabled>'+data[count].raca+'</option>';
+                            else
+                              output += '<option value="'+data[count].id_raca+'">'+data[count].raca+'</option>';
+                          }
+                  }
+                  $('#reg-raca').html(output);
+          }
+  });
+}

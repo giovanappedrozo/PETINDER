@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-outline mb-4">
-      <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Gender'); ?>">
+      <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Gender'); ?>" required>
       <option value="" selected disabled><?php echo $this->lang->line('Gender'); ?></option>
       <?php foreach ($generos as $genero): ?>
               <option value="<?php echo $genero['id_genero']; ?>"><?php echo $genero[$lang]; ?></option>

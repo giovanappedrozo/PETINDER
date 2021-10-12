@@ -94,15 +94,6 @@ class Usuarios_model extends CI_Model {
                 return true;
         }
     }
-    
-    function logged() {
-        $logged = $this->session->userdata('logged');
-    
-        if (!isset($logged) || $logged != true) {
-            echo 'Voce nao tem permissao para entrar nessa pagina';
-            die();
-        }
-    }
 
     function distance($id_usuario = FALSE){
         $usuario_logado = $this->session->userdata("id");
@@ -114,7 +105,7 @@ class Usuarios_model extends CI_Model {
         if($localizacao){
             $this->db
             ->select("ST_Distance(localizacao::geometry, POINT('".$localizacao."')::geometry) AS dist")
-            ->where('id_usuario='.$id_usuario);
+            ->where('id_usuario='.$usuario_logado);
 
             $query = $this->db->get('usuario');
 
@@ -221,15 +212,15 @@ class Usuarios_model extends CI_Model {
         }
     }
 
-    public function perfect_match($usuario){
+    public function perfect_match(){
+        $usuario = self::get_usuario($this->session->userdata('id'));
+
         if($usuario['id_moradia'] == 1)
-            $moradia = "AND id_porte = '2' OR id_porte = '3'";
+            $moradia = "AND id_porte = '2' OR id_porte = '3' OR id_porte = '1'";
     
         elseif($usuario['id_moradia'] == 2)
             $moradia = "AND id_porte = '1' OR id_porte = '2'";
         
-        elseif($usuario['id_moradia'] == 3)
-            $moradia = "AND id_porte = '3' OR id_porte = '4'";
         
         else
             $moradia = '';
@@ -266,13 +257,12 @@ class Usuarios_model extends CI_Model {
 
         $query = $this->db
                     ->select("*")
-                    ->where("id_status = '1'".$moradia.$outros.$horas.$alergia.$criancas.$moradores."AND id_doador <>".$usuario['id_usuario'])
-                    ->limit(1)
+                    ->where("id_doador <>".$usuario['id_usuario'].$moradia.$outros.$horas.$alergia.$criancas.$moradores)
                     ->get('animal');
 
-        $result = $query->row_array();
+        $result = $query->result_array();
 
-        return $result['id_animal'];
+        return $result;
     }
 
     public function banir($denunciado){

@@ -43,7 +43,7 @@
     }) 
   }
 
-  function load_notifications(){
+  function load_not_msg(){
     $.ajax({
       url:"<?php echo site_url('mensagens/verify_messages');?>",
       method:"POST",
@@ -53,8 +53,23 @@
         if(data.length > 0)
         {
           output = '<span class="green-ball">&nbsp;</span>';
+          $('#msg-not').html(output);
       }
-      $('#msg-not').html(output);
+    }
+    })
+  }
+
+  function load_notifications(){
+    $.ajax({
+      url:"<?php echo site_url('usuarios/verify_notifications');?>",
+      method:"POST",
+      data: {action: 'true'},
+      success:function(data){
+        if(data == 'TRUE')
+        {
+          output = '<span class="green-ball">&nbsp;</span>';
+          $('#notifications').html(output);
+      }
     }
     })
   }

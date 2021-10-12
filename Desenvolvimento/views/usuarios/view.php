@@ -4,8 +4,7 @@
   <?php } unset($_SESSION['danger']);?>
 
   <div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-md-12 col-xl-4">
-      <div class="card">
+     <div class="card">
         <div class="card-body text-center">
           
           <!--Se nao for o perfil do usuario logado !--> 
@@ -46,9 +45,9 @@
             </form>
           </div>
           <hr/>
-          <div class="d-flex justify-content-between text-center application">
+          <div class="justify-content-between text-center application">
                 <div>
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Dwelling_type'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Dwelling_type'); ?></p>
                   <p class="text-muted mb-0">
                     <?php foreach ($moradias as $moradia): 
                         if($moradia['id_moradia'] == $usuario['id_moradia']) echo $moradia[$lang];
@@ -56,7 +55,7 @@
                   </p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Secure_access'); ?>?</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Secure_access'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['acessoprotegido'] === TRUE)
                       echo $this->lang->line('Yes');
@@ -65,13 +64,13 @@
                   </p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('People'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('People'); ?></p>
                   <p class="text-muted mb-0">
                     <?php echo $usuario['qtdmoradores']; ?>
                   </p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Children_edit'); ?>?</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Children_edit'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['criancas'] === TRUE)
                       echo $this->lang->line('Yes');
@@ -80,7 +79,7 @@
                   </p>
                 </div>
                 <div>
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Ill'); ?>?</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Ill'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['alergia'] === TRUE)
                         echo $this->lang->line('Yes');
@@ -90,9 +89,9 @@
                 </div>
               </div>
 
-              <div class="d-flex justify-content-between text-center application">
+              <div class="justify-content-between text-center application">
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Hours_alone'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Hours_alone'); ?></p>
                   <p class="text-muted mb-0">
                     <?php foreach ($horas as $hora): 
                       if($hora['id_horassozinho'] == $usuario['id_horassozinho'])
@@ -101,7 +100,7 @@
                   </p>
                 </div>
                 <div class="px-3">
-                <p class="mb-2 h5 application"><?php echo $this->lang->line('Expenses_edit'); ?>?</p>
+                <p class="mb-2 h5 application title"><?php echo $this->lang->line('Expenses_edit'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['gastos'] === TRUE)
                         echo $this->lang->line('Yes');
@@ -110,7 +109,7 @@
                   </p>
                 </div>
                 <div>
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Other_edit'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Other_edit'); ?></p>
                   <p class="text-muted mb-0">
                     <?php foreach ($outros as $outro): 
                       if($outro['id_outrosanimais'] == $usuario['id_outrosanimais'])
@@ -135,32 +134,32 @@
             </div>
             <?php }?>
 
-            <p class="text-muted mb-4"><?php $dataNascimento = new DateTime($usuario['datanasci']);
-            echo $dataNascimento->format('d/m/Y');?>
-            <span class="mx-2">|</span>
-            <a onclick="confirm();" class='icones'><i class="bi bi-trash-fill"></i> <?php echo $this->lang->line('Delete_account'); ?></a>
-            <?php if($usuario['localizacao'] == NULL){ ?>
-            <span class="mx-2">|</span>
+            <p class="text-muted mb-4 view"><?php $dataNascimento = new DateTime($usuario['datanasci']);
+            echo $dataNascimento->format('d/m/Y');?></p>
+            <p class="view"><span class="mx-2 barra">|</span>
+            <a onclick="confirm();" class='icones'><i class="bi bi-trash-fill"></i> <?php echo $this->lang->line('Delete_account'); ?></a></p>
+            <p class="view"><?php if($usuario['localizacao'] == NULL){ ?>
+            <span class="mx-2 barra">|</span>
             <a class='icones' onclick="getLocation();"><i class="bi bi-geo-alt-fill"></i> <?php echo $this->lang->line('Add_Location'); ?></a>
             <?php } else {?>
-            <span class="mx-2">|</span>
+            <span class="mx-2 barra">|</span>
             <a class='icones' onclick="getLocation();"><i class="bi bi-geo-alt-fill"></i> <?php echo $this->lang->line('Change_Location'); ?></a>
             <?php } ?>
             <button class="btn-hidden" id="submit"></button>
             </p>
 
-            <div class="d-flex justify-content-between text-center mb-2">
+            <div class="justify-content-between text-center mb-2 application">
               <div>
                 <p class="mb-0">
-                  <div class="form-floating mb-4">
+                  <div class="form-floating mb-4 application">
                       <input type="text" id="nome" name="nome" class="form-control" value="<?php echo $usuario['nome'];?>">
                       <label for="nome"><?php echo $this->lang->line('Name'); ?></label>
                   </div>
                 </p>
               </div>
-              <div class="px-3">
+              <div>
                 <p class="mb-0">
-                  <div class="form-floating mb-4">
+                  <div class="form-floating mb-4 application">
                     <input type="email" id="email" name="email" class="form-control" value="<?php echo $usuario['email']; ?>">
                     <label for="email"><?php echo $this->lang->line('Email'); ?></label>
                   </div>
@@ -168,7 +167,7 @@
               </div>
               <div>
                 <p class="mb-0">
-                  <div class="form-floating mb-4">
+                  <div class="form-floating mb-4 application">
                     <input type="password" id="senha" name="senha" class="form-control" placeholder="********" minlength="6">
                     <label for="senha"><?php echo $this->lang->line('New_password'); ?></label>
                   </div>
@@ -176,7 +175,7 @@
               </div>
               <div>
                 <p class="mb-0">
-                  <div class="form-floating mb-4 select">
+                  <div class="form-floating mb-4 select application">
                     <select name="genero" id="genero" class="form-select" placeholder="<?php echo $this->lang->line('Gender'); ?>">
                       <?php foreach ($generos as $genero): 
                       if($genero['id_genero'] == $usuario['id_genero']){ ?>
@@ -197,9 +196,9 @@
             
             <?php if($usuario['qtdmoradores'] != null) { ?>
               <hr/>
-              <div class="d-flex justify-content-between text-center application">
+              <div class="justify-content-between text-center application">
                 <div>
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Dwelling_type'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Dwelling_type'); ?></p>
                   <p class="text-muted mb-0">
                     <?php foreach ($moradias as $moradia): 
                         if($moradia['id_moradia'] == $usuario['id_moradia']) echo $moradia[$lang];
@@ -207,7 +206,7 @@
                   </p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Secure_access'); ?>?</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Secure_access'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['acessoprotegido'] === TRUE)
                       echo $this->lang->line('Yes');
@@ -216,13 +215,13 @@
                   </p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('People'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('People'); ?></p>
                   <p class="text-muted mb-0">
                     <?php echo $usuario['qtdmoradores']; ?>
                   </p>
                 </div>
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Children_edit'); ?>?</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Children_edit'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['criancas'] === TRUE)
                       echo $this->lang->line('Yes');
@@ -231,7 +230,7 @@
                   </p>
                 </div>
                 <div>
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Ill'); ?>?</p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Ill'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['alergia'] === TRUE)
                         echo $this->lang->line('Yes');
@@ -241,9 +240,9 @@
                 </div>
               </div>
 
-              <div class="d-flex justify-content-between text-center application">
+              <div class="justify-content-between text-center application">
                 <div class="px-3">
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Hours_alone'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Hours_alone'); ?></p>
                   <p class="text-muted mb-0">
                     <?php foreach ($horas as $hora): 
                       if($hora['id_horassozinho'] == $usuario['id_horassozinho'])
@@ -252,7 +251,7 @@
                   </p>
                 </div>
                 <div class="px-3">
-                <p class="mb-2 h5 application"><?php echo $this->lang->line('Expenses_edit'); ?>?</p>
+                <p class="mb-2 h5 application title"><?php echo $this->lang->line('Expenses_edit'); ?>?</p>
                   <p class="text-muted mb-0">
                     <?php if($usuario['gastos'] === TRUE)
                         echo $this->lang->line('Yes');
@@ -261,7 +260,7 @@
                   </p>
                 </div>
                 <div>
-                  <p class="mb-2 h5 application"><?php echo $this->lang->line('Other_edit'); ?></p>
+                  <p class="mb-2 h5 application title"><?php echo $this->lang->line('Other_edit'); ?></p>
                   <p class="text-muted mb-0">
                     <?php foreach ($outros as $outro): 
                       if($outro['id_outrosanimais'] == $usuario['id_outrosanimais'])
@@ -274,7 +273,6 @@
             <?php } ?>
           <?php } ?>
         </div>
-      </div>
     </div>
   </div>
 </main>
@@ -332,14 +330,17 @@
     })
   }
 
-  <?php if($usuario['localizacao'] && $usuario == $this->session->userdata('id')){ ?>
+  mapa();
+
+function mapa(){
+  <?php if($usuario['localizacao'] && $usuario['id_usuario'] == $this->session->userdata('id')){ ?>
     var mymap = L.map('mapid').setView([<?php echo $lat[0]; ?>, <?php echo $long[0]; ?>], 13);
 
     var patinha = L.icon({
     iconUrl: '<?php  echo base_url('assets/img/patinha.png');?>',
     iconSize:     [20, 20], 
     iconAnchor:   [10, 10], 
-});
+    });
 
     var marker = L.marker([<?php echo $lat[0]; ?>, <?php echo $long[0]; ?>],{icon: patinha}).addTo(mymap);
 
@@ -357,4 +358,5 @@
       zoomOffset: -1
     }).addTo(mymap);
   <?php } ?>
+}
 </script>

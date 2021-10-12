@@ -146,3 +146,6 @@ $lang['Type_email'] = 'Digite seu email';
 $lang['Error'] = 'Ocorreu um erro inesperado. Tente novamente mais tarde.';
 $lang['Passwd_recovered'] = "Senha redefinida com sucesso!";
 $lang['Reset_passwd_msg'] = "Olá! Se você solicitou a recuperação da senha de acesso da sua conta, acesse o link:<br>";
+$lang['Queue'] = "Fila";
+$lang['Wrong_email'] = "E-mail inv&#225;lido. Por favor, tente de novo ou cadastre-se ";
+$lang['Rehome_pet'] = 'Recolocar para adoção';

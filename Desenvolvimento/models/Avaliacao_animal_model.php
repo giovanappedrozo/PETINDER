@@ -35,6 +35,11 @@ class Avaliacao_animal_model extends CI_Model {
             $query = $this->db->get_where('avaliacao_animal', array('id_usuario' => $id_usuario, 'id_animal' => $id_animal, 'avaliacao' => TRUE));
             return $query->row_array();
         }
+
+        public function get_avaliacao_by_animal($id_animal){
+            $query = $this->db->get_where('avaliacao_animal', array('id_animal' => $id_animal, 'avaliacao' => 'TRUE'));
+            return $query->result_array();
+        }
     
         public function set_avaliacao()
         {
@@ -109,16 +114,19 @@ class Avaliacao_animal_model extends CI_Model {
 
         public function delete_avaliacao($id_usuario, $avaliacao, $id_animal)
         {   
-            $this->db->where(array('id_usuario' => $id_usuario, 'avaliacao' => $avaliacao, 'id_animal' => $id_animal))->delete('avaliacao_animal');
+            $av = self::get_avaliacao_by_both($id_usuario, $id_animal);
 
-            if($avaliacao == 'TRUE'){
-                $animal = $this->animais_model->get_animais($id_animal);
+            if($av){
+                if($av['status_solicitacao'] == 2 && $avaliacao == 'TRUE'){
+                        $animal = $this->animais_model->get_animais($id_animal);
 
-                if($animal['id_status'] == 2){
-                    $data = array('id_status' => 1);
-                    $this->db->update('animal', $data, array('id_animal' => $id_animal));
+                        if($animal['id_status'] == 2 ){
+                            $data = array('id_status' => 1);
+                            $this->db->update('animal', $data, array('id_animal' => $id_animal));
+                        }
                 }
             }
+            $this->db->where(array('id_usuario' => $id_usuario, 'avaliacao' => $avaliacao, 'id_animal' => $id_animal))->delete('avaliacao_animal');
         }
 
         public function delete_avaliacao_by_id($id_avaliacao)

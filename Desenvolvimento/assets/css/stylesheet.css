@@ -232,10 +232,6 @@ main{
     font-weight: bold;
 }  
 
-.application{
-    font-size: medium !important;
-}
-
 .red{
     color: rgb(186, 48, 48);
 }
@@ -254,7 +250,7 @@ main{
 }
 
 .chat{
-    height: 300px;
+    height: 400px;
     overflow-y: scroll;
 } 
 
@@ -269,13 +265,33 @@ main{
     width: 97%;
 }
 
+.view{
+    display: inline !important;
+}
+
+.application{
+    display: flex !important;
+}
+
+.menu{
+    width: 100%;
+}
+
+.title{
+    display: block !important;
+}
+
+.col-9{
+    width: 300px !important;
+}
+
+.info-adic{
+    max-width: 300px;
+}
+
 @media (max-width:992px){
     .navbar{
         width: 100%;
-    }
-
-    .container{
-        text-align: center;
     }
 
     #mapid {
@@ -284,10 +300,39 @@ main{
     }
 }
 
+@media (max-width: 478px){
+    .index{
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    .col-9{
+        width: 120px !important;
+    }
+}
+
 @media (max-width:768px){
     #mapid {
         width: 80%; 
         height: 235px;
+    }
+
+    .view{
+        display: block !important;
+    }
+
+    .barra{
+        display: none;
+    }
+
+    .application{
+        display: block !important;
+        padding: 10px;
+    }
+
+    .raca{
+        width: 185px !important;
     }
 }
 

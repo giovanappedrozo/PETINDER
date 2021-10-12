@@ -49,7 +49,7 @@ class Animais_model extends CI_Model {
         public function set_animais()
         {
             $this->load->helper('url');
-
+ 
             $cast = $this->input->post('castrado');
             $img = $this->upload->data();
             $img = $img['file_name'];
@@ -141,15 +141,16 @@ class Animais_model extends CI_Model {
 
         public function delete_animal($id_animal = FALSE){
             if ($id_animal != FALSE){
-                $query = $this->db
-                    ->where('id_animal', $id_animal)
-                    ->delete('animal');
-                return $this->session->set_flashdata("danger", $this->lang->line("LocationNull")."<a href='".site_url('usuarios/register')."'></a>");
+                return $query = $this->db
+                ->where('id_animal', $id_animal)
+                ->delete('animal');
             }
         }
 
-        public function update_animal($id_animal)
+        public function update_animal($id_animal, $imagem)
         {
+            $this->load->helper('url');
+
             $cast = $this->input->post('castrado');
 
             if($cast == 'castrado') $cast = TRUE;
@@ -160,16 +161,32 @@ class Animais_model extends CI_Model {
 
             $especial = $this->input->post('especial');
             if(!$especial) $especial = TRUE;
+ 
+            if($imagem == 'TRUE'){
+                $img = $this->upload->data();
+                $img = $img['file_name']; 
 
-            $data = array(
-                'nome' => $nome,
-                'id_porte' => $this->input->post('porte'),
-                'id_pelagem' => $this->input->post('pelagem'),
-                'especial' => $especial,
-                'id_temperamento' => $this->input->post('temperamento'),
-                'infoadicional' => $this->input->post('info'),
-                'castrado' => $cast
-            );
+                $data = array(
+                    'imagem' => $img,
+                    'nome' => $nome,
+                    'id_porte' => $this->input->post('porte'),
+                    'id_pelagem' => $this->input->post('pelagem'),
+                    'especial' => $especial,
+                    'id_temperamento' => $this->input->post('temperamento'),
+                    'infoadicional' => $this->input->post('info'),
+                    'castrado' => $cast
+                );
+            }
+            else 
+                $data = array(
+                    'nome' => $nome,
+                    'id_porte' => $this->input->post('porte'),
+                    'id_pelagem' => $this->input->post('pelagem'),
+                    'especial' => $especial,
+                    'id_temperamento' => $this->input->post('temperamento'),
+                    'infoadicional' => $this->input->post('info'),
+                    'castrado' => $cast
+                );
 
             return $this->db->update('animal',$data,array('id_animal' => $id_animal));        
         } 
@@ -212,11 +229,19 @@ class Animais_model extends CI_Model {
 
             if($this->input->post('pelagem')) $pelagem = "AND id_pelagem = ".$this->input->post('pelagem'); else $pelagem = "";
 
+            if($this->input->post('especie')){
+                if($this->input->post('especie') == 1)
+                    $especie = "AND id_raca < 51";
+                else
+                    $especie = "AND id_raca > 50";
+            }  
+            else $especie = "";
+
             if($this->input->post('castrado')) $castrado = "AND castrado = ".$this->input->post('castrado'); else $castrado = "";
 
             $query = $this->db
             ->select("*")
-            ->where("id_animal != '0'".$genero.$raca.$porte.$pelagem.$castrado)
+            ->where("id_animal != '0'".$genero.$raca.$porte.$pelagem.$castrado.$especie)
             ->get('animal');
 
             return $query->result_array();

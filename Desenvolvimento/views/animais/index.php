@@ -20,9 +20,9 @@ if($this->session->flashdata("danger")) { ?>
                                 <input type="text" id="nome" name="nome" class="search" placeholder="<?php echo $this->lang->line('Search_by_name'); ?>">
                         </a>
                         
-                        <ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                        <ul class='dropdown-menu menu' aria-labelledby='navbarDropdownMenuLink'>
                         <li class="dropdown-item">
-                                <div class="d-flex justify-content-between text-center mb-2">
+                                <div class="justify-content-between text-center mb-2 ">
                                         <div>
                                                 <p class="mb-0">
                                                         <div class="form-outline mb-4">
@@ -35,32 +35,28 @@ if($this->session->flashdata("danger")) { ?>
                                                         </div>
                                                 </p>
                                         </div>
-                                        <div class="px-3">
+                                        <div>
                                                 <p class="mb-0">
                                                         <div class="form-outline mb-4">
-                                                                <select name="especie" id="especie" onchange="change();" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>"  >
-                                                                <option value="" selected disabled><?php echo $this->lang->line('Species'); ?></option>
-                                                                <?php foreach ($especies as $especie): ?>
-                                                                        <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie[$lang]; ?></option>
-                                                                <?php endforeach; ?>
+                                                                <select name="especie" onchange="racas();" id="reg-especie" class="form-select" placeholder="<?php echo $this->lang->line('Species'); ?>">
+                                                                        <option selected disabled><?php echo $this->lang->line('Species'); ?></option>
+                                                                        <?php foreach ($especies as $especie): ?>
+                                                                                <option value="<?php echo $especie['id_especies']; ?>"><?php echo $especie[$lang]; ?></option>
+                                                                        <?php endforeach; ?>
                                                                 </select>
                                                         </div>
                                                 </p>
                                         </div>
-                                        <div class="px-3">
+                                        <div>
                                                 <p class="mb-0">
-                                                        <div class="form-outline mb-4" style="width: 100px">
-                                                                <select name="raca" id="raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>">
+                                                        <div class="form-outline mb-4 raca">
+                                                        <select name="raca" id="reg-raca" class="form-select" placeholder="<?php echo $this->lang->line('Breed'); ?>">
                                                                 <option value="" selected disabled><?php echo $this->lang->line('Breed'); ?></option>
-                                                                <option disabled value=""><?php echo " ------------------------------------------------------------------------------------------------------------ ".$this->lang->line("Breed_dog")." -----------------------------------------------------------------------------------------------------------";?></option>
-                                                                <?php foreach ($racas as $raca): ?>
-                                                                                <option value="<?php echo $raca['id_raca']; ?>"><?php echo $raca[$lang]; ?></option>
-                                                                <?php endforeach; ?>
-                                                                </select>
+                                                        </select>
                                                         </div>
                                                 </p>
                                         </div>
-                                        <div class="px-3">
+                                        <div>
                                                 <p class="mb-0">
                                                         <div class="form-outline mb-4">
                                                                 <select name="porte" id="porte" class="form-select" placeholder="<?php echo $this->lang->line('Size'); ?>">
@@ -72,7 +68,7 @@ if($this->session->flashdata("danger")) { ?>
                                                         </div>
                                                 </p>
                                         </div>
-                                        <div class="px-3">
+                                        <div>
                                                 <p class="mb-0">
                                                         <div class="form-outline mb-4">
                                                                 <select name="pelagem" id="pelagem" class="form-select" placeholder="<?php echo $this->lang->line('Coat_search'); ?>">
@@ -116,7 +112,7 @@ if($this->session->flashdata("danger")) { ?>
                 foreach ($animais as $a): 
                         foreach($a as $animal):
                 if(($animal['id_doador'] != $this->session->userdata("id")) && ($animal['id_status'] != 3)){?>
-        <div class="card px-3 pt-3">
+        <div class="card px-3 pt-3 index">
                 <a href="<?php echo site_url('animais/view/'.$animal['id_animal']); ?>" class="text-dark">
                         <div class="row mb-4 border-bottom pb-2">
                                 <div class="col-3">

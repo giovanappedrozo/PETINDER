@@ -14,7 +14,7 @@ class Portes_model extends CI_Model {
                 return $query->result_array();
             }
     
-            $query = $this->db->get_where('porte', array('porte' => $id_porte));
+            $query = $this->db->get_where('porte', array('id_porte' => $id_porte));
             return $query->row_array();
         }
 }

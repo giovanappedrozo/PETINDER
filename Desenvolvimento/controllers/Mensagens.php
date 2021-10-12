@@ -15,6 +15,7 @@ class Mensagens extends CI_Controller {
         if($this->session->userdata('logged')){
             $data['animal'] = $this->animais_model->get_animais($id_animal);
             $data['usuario'] = null;
+            $data['remetente'] = null;
             $data['motivos'] = $this->motivos_denuncia_model->get_motivo();
             $usuario = $this->usuarios_model->get_usuario($id_usuario);
 
@@ -28,7 +29,10 @@ class Mensagens extends CI_Controller {
             if($data['mensagens']){
                 foreach($data['mensagens'] as $msg){
                     if($msg['status_msg'] == 0)
-                    $this->mensagens_model->change_status($msg['id_mensagem']);
+                        $this->mensagens_model->change_status($msg['id_mensagem']);
+
+                    if($msg['id_remetente'] == $this->session->userdata('id'))
+                        $data['remetente'] = 'TRUE';
                 }
             }
 
@@ -54,7 +58,7 @@ class Mensagens extends CI_Controller {
                             'conteudo'  => $msg['conteudo'],
                             'datahora' => $msg['datahora'],
                             'direcao' => 'esquerda'
-                            );
+                            ); 
                         else
                         $output[] = array(
                             'conteudo'  => $msg['conteudo'],
@@ -89,6 +93,7 @@ class Mensagens extends CI_Controller {
     }
  
     public function load_messages(){
+        if($this->session->userdata('logged')){
             $data = $this->mensagens_model->get_mensagem_by_usuario($this->session->userdata('id'));
 
             $output = array();
@@ -110,7 +115,8 @@ class Mensagens extends CI_Controller {
                     }
                 }
             }
-            echo json_encode($output);   
+            echo json_encode($output); 
+        }  
     }
 
     public function verify_message(){
@@ -122,13 +128,5 @@ class Mensagens extends CI_Controller {
             }
         }
     }
-
-    public function verify_nots(){
-        if($this->input->post('action')){
-            $notificacoes = $this->mensagens_model->get_mensagem_by_usuario_status($this->session->userdata('id'), 'FALSE');
-
-        echo json_encode($notificacoes);
-        }
-    }
 }
-?>
+?> 

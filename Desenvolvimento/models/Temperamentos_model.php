@@ -15,7 +15,7 @@ class Temperamentos_model extends CI_Model {
                 return $query->result_array();
             }
     
-            $query = $this->db->get_where('temperamento', array('temperamento' => $id_temperamento));
+            $query = $this->db->get_where('temperamento', array('id_temperamento' => $id_temperamento));
             return $query->row_array();
         }
 }

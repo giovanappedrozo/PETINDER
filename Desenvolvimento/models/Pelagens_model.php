@@ -14,7 +14,7 @@ class Pelagens_model extends CI_Model {
                 return $query->result_array();
             }
     
-            $query = $this->db->get_where('pelagem', array('pelagem' => $id_pelagem));
+            $query = $this->db->get_where('pelagem', array('id_pelagem' => $id_pelagem));
             return $query->row_array();
         }
 }

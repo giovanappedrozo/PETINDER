@@ -10,7 +10,7 @@
                         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" />
                         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
-                        <script src="http://code.jquery.com/jquery-latest.js"></script>
+                        <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
                         <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/5.5.2/bootbox.js" integrity="sha512-K3MtzSFJk6kgiFxCXXQKH6BbyBrTkTDf7E6kFh3xBZ2QNMtb6cU/RstENgQkdSLkAZeH/zAtzkxJOTTd8BqpHQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
                         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
                         <script src="<?php  echo base_url('assets/js/script.js');?>"></script>
@@ -61,7 +61,7 @@
                                                                 <a class='nav-link dropdown-toggle' id='navbarDropdownMenuLink' role='button' 
                                                                 data-bs-toggle='dropdown' aria-expanded='false'>
 
-                                                                <?php $lang = $this->session->get_userdata('site_lang');
+                                                                <?php if($this->session->get_userdata('site_lang')) $lang = $this->session->get_userdata('site_lang');
                                                                 $lang = $lang['site_lang'];
 
                                                                 if($lang == 'portuguese'){ ?>
@@ -89,7 +89,7 @@
                                                                 echo "<a class='btn-login' href='".site_url('usuarios/register')."'>".$this->lang->line("Title_reg")."</a>";
                                                         }
                                                         else{ ?>
-                                                                &nbsp;<a href="<?php echo site_url('usuarios/matches/adotar'); ?>"><i class="bi bi-bell-fill icones"></i><span class="green-ball"></span></a>&nbsp;&nbsp;
+                                                                &nbsp;<a href="<?php echo site_url('usuarios/matches/adotar'); ?>"><i class="bi bi-bell-fill icones" id="notifications"></i></a>&nbsp;&nbsp;
 
                                                         <ul class='navbar-nav'>
                                                                 <li class='nav-item dropdown'>
