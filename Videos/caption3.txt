@@ -30,3 +30,14 @@
 1628035052|Planilha Notas
 1628036319|Documento Entrega Inicial
 1628037621|LaTeX Entrega Inicial
+1628601386|Config
+1628601386|Internacionalização
+1628601386|Banco de dados
+1628601386|Camada View
+1628601386|Estilo
+1632927873|Imagens
+1633543739|Controle
+1633543739|Erros
+1633544013|Requisitos do sistema
+1633557126|Documentação
+1634064835|LaTeX
