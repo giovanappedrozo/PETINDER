@@ -147,10 +147,8 @@ class Animais_model extends CI_Model {
             }
         }
 
-        public function update_animal($id_animal, $imagem)
+        public function update_animal($id_animal)
         {
-            $this->load->helper('url');
-
             $cast = $this->input->post('castrado');
 
             if($cast == 'castrado') $cast = TRUE;
@@ -161,32 +159,16 @@ class Animais_model extends CI_Model {
 
             $especial = $this->input->post('especial');
             if(!$especial) $especial = TRUE;
- 
-            if($imagem == 'TRUE'){
-                $img = $this->upload->data();
-                $img = $img['file_name']; 
 
-                $data = array(
-                    'imagem' => $img,
-                    'nome' => $nome,
-                    'id_porte' => $this->input->post('porte'),
-                    'id_pelagem' => $this->input->post('pelagem'),
-                    'especial' => $especial,
-                    'id_temperamento' => $this->input->post('temperamento'),
-                    'infoadicional' => $this->input->post('info'),
-                    'castrado' => $cast
-                );
-            }
-            else 
-                $data = array(
-                    'nome' => $nome,
-                    'id_porte' => $this->input->post('porte'),
-                    'id_pelagem' => $this->input->post('pelagem'),
-                    'especial' => $especial,
-                    'id_temperamento' => $this->input->post('temperamento'),
-                    'infoadicional' => $this->input->post('info'),
-                    'castrado' => $cast
-                );
+            $data = array(
+                'nome' => $nome,
+                'id_porte' => $this->input->post('porte'),
+                'id_pelagem' => $this->input->post('pelagem'),
+                'especial' => $especial,
+                'id_temperamento' => $this->input->post('temperamento'),
+                'infoadicional' => $this->input->post('info'),
+                'castrado' => $cast
+            );
 
             return $this->db->update('animal',$data,array('id_animal' => $id_animal));        
         } 

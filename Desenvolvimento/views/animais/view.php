@@ -48,10 +48,10 @@
               <?php echo form_open_multipart('animais/review');?>
                 <input type="hidden" name="id_animal" value='<?php echo $animal['id_animal']; ?>'>
                 <button type="submit" class="<?php if($likes) echo 'btn btn-primary btn-rounded btn-lg'; else echo 'btn btn-primary-0 btn-rounded btn-lg';?>" name='avaliacao' value='TRUE'>
-                  <i class="bi bi-heart-fill"></i> MI-AU-DOREI
+                  <i class="bi bi-heart-fill"></i> <?php echo $this->lang->line('Like'); ?>
                 </button>
                 <button type="submit" class="<?php if($dislikes) echo 'btn btn-primary btn-rounded btn-lg'; else echo 'btn btn-primary-0 btn-rounded btn-lg';?>" name='avaliacao' value='FALSE'>
-                  <i class="bi bi-x-circle-fill"></i> DES-AU-GOSTEI
+                  <i class="bi bi-x-circle-fill"></i> <?php echo $this->lang->line('Dislike'); ?>
                 </button>
               </form>
             </div>

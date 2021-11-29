@@ -112,6 +112,17 @@ class Usuarios extends CI_Controller {
                 if($this->input->post('action')){
                         $query = $this->usuarios_model->verify_email($this->input->post('action'));
                         if($query){
+                                $config = array(
+                                        'protocol' => 'smtp',
+                                        'smtp_host' => 'smtp.sendgrid.net',
+                                        'smtp_user' => 'apikey',
+                                        'smtp_pass' => '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',
+                                        'charset' => 'utf-8',
+                                        'mailtype' => 'html',
+                                        'smtp_port' => 587,
+                                        'crlf' => "\r\n",
+                                        'newline' => "\r\n"
+                                );
 
                                 $this->load->library('email', $config);
                                 
@@ -154,7 +165,8 @@ class Usuarios extends CI_Controller {
 
                         $datediff = $datacriacao->diff($dataatual);
 
-                        $data['email'] = $query['email'];
+                        $data['email'] = $this->usuarios_model->get_usuario($query['id_usuario']);
+                        $data['email'] = $data['email']['email'];
                         $data['title'] = $this->lang->line('Recover_title');
 
                         if($datediff->h <= 24){
@@ -389,7 +401,8 @@ class Usuarios extends CI_Controller {
                                 $data = array(
                                         'usuario' => $query['nome'],
                                         'id' => $query['id_usuario'],
-                                        'logged' => true
+                                        'logged' => true,
+                                        'localizacao' => $query['localizacao']
                                         );
                                 $this->session->set_userdata($data);
                                 $this->usuarios_model->verify_animals();
@@ -594,7 +607,11 @@ class Usuarios extends CI_Controller {
                         sleep(1);
                         $animais = $this->usuarios_model->perfect_match();
 
-                        $animal = array_rand($animais, 1);
+                        $animal['id_status'] = 3;
+
+                        while($animal['id_status'] == 3){
+                                $animal = array_rand($animais, 1);
+                        }
 
                         redirect('animais/view/'.$animais[$animal]['id_animal']); 
                 }
@@ -604,11 +621,12 @@ class Usuarios extends CI_Controller {
 
         public function denuncia($denunciante, $denunciado, $denuncia, $animal){
                 $denuncias = $this->denuncias_model->get_denuncia_by_denunciado($denunciado);
+                $usuario = $this->usuarios_model->get_usuario($denunciado);
                 if($denuncias && sizeof($denuncias) >= 2){
+                        self::notify_ban($usuario['email']);
                         $this->usuarios_model->banir($denunciado);
                 }
-                $usuario = $this->usuarios_model->get_usuario($denunciado);
-                self::notify_ban($usuario['email']);
+
                 $this->denuncias_model->set_denuncia($denunciante, $denunciado, $denuncia);
                 $doador = $this->animais_model->get_animais($animal);
                 if($doador['id_doador'] == $denunciante)
@@ -620,6 +638,17 @@ class Usuarios extends CI_Controller {
         }
 
         public function notify_ban($email){
+                $config = array(
+                    'protocol' => 'smtp',
+                    'smtp_host' => 'smtp.sendgrid.net',
+                    'smtp_user' => 'apikey',
+                    'smtp_pass' => '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',
+                    'charset' => 'utf-8',
+                    'mailtype' => 'html',
+                    'smtp_port' => 587,
+                    'crlf' => "\r\n",
+                    'newline' => "\r\n"
+                );
 
                 $this->load->library('email', $config);
                 

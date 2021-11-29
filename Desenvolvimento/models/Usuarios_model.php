@@ -117,6 +117,7 @@ class Usuarios_model extends CI_Model {
     {
         $nome = $this->input->post('nome');
         $nome = ucfirst(strtolower($nome));
+        $ponto = null;
 
         if($this->input->post('senha')){
             $senha = $this->input->post('senha');
@@ -168,7 +169,8 @@ class Usuarios_model extends CI_Model {
                 ); 
         }
         $session = array(
-            'usuario' => $nome
+            'usuario' => $nome,
+            'localizacao' => $ponto
             );
         $this->session->set_userdata($session);
         return $this->db->update('usuario', $data, array('id_usuario' => $id_usuario));        
@@ -257,7 +259,7 @@ class Usuarios_model extends CI_Model {
 
         $query = $this->db
                     ->select("*")
-                    ->where("id_doador <>".$usuario['id_usuario'].$moradia.$outros.$horas.$alergia.$criancas.$moradores)
+                    ->where("id_status <> 3 AND id_doador <>".$usuario['id_usuario'].$moradia.$outros.$horas.$alergia.$criancas.$moradores)
                     ->get('animal');
 
         $result = $query->result_array();

@@ -232,6 +232,10 @@ main{
     font-weight: bold;
 }  
 
+.application{
+    font-size: medium !important;
+}
+
 .red{
     color: rgb(186, 48, 48);
 }
@@ -250,7 +254,7 @@ main{
 }
 
 .chat{
-    height: 400px;
+    height: 300px;
     overflow-y: scroll;
 } 
 
@@ -265,16 +269,16 @@ main{
     width: 97%;
 }
 
+.raca{
+    width: 100px;
+}
+
 .view{
     display: inline !important;
 }
 
 .application{
     display: flex !important;
-}
-
-.menu{
-    width: 100%;
 }
 
 .title{
@@ -285,8 +289,74 @@ main{
     width: 300px !important;
 }
 
-.info-adic{
-    max-width: 300px;
+.video-wrapper{
+    background-color: rgb(204, 89, 89);
+    width: 100%;
+    border-radius: 10px;
+    display: flex;
+    height: 260px;
+}
+
+.video-text{
+    width: 57%;
+    text-align: center;
+    margin-top: 3.5%;
+}
+
+.video-text h2{
+    color: white !important;
+    text-shadow: rgb(156, 22, 22) 1px 0 10px;
+    font-size: 300%;
+}
+
+.video-text a{
+    background-color: rgb(0, 0, 0) !important;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+}
+
+.video-text a:hover{
+    background-color: rgb(255, 255, 255) !important;
+    color: rgb(156, 22, 22);
+}
+
+.video-text span{
+    color: rgb(0, 0, 0);
+}
+
+.video{
+    width: 40%;
+    height: 260px;
+}
+
+.btn-denunciar{
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background-color: rgb(204, 89, 89);
+    padding: 5px;
+    color: white;
+    border-radius: 40px;
+    width: 13%;
+    text-align: center;
+}
+
+.btn-denunciar:hover{
+    color: white;
+    background-color: rgb(156, 22, 22);
+}
+
+.text-about{
+    width: 85%;
+    margin-left: 9%;
+}
+
+.follow{
+    font-size: medium;
+}
+
+.menu{
+    color: rgb(120, 118, 121) !important;
 }
 
 @media (max-width:992px){
@@ -297,6 +367,10 @@ main{
     #mapid {
         width: 60%; 
         height: 265px;
+    }
+
+    .video-text h2{
+        font-size: 250%;
     }
 }
 
@@ -332,7 +406,7 @@ main{
     }
 
     .raca{
-        width: 185px !important;
+        width: 200px !important;
     }
 }
 

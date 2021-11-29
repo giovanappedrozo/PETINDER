@@ -15,9 +15,10 @@ class ResetPassword_model extends CI_Model {
         }
 
         public function set_token($token, $email){
+            $usuario = $this->db->get_where('usuario', array('email' => $email))->row_array();
             $data = array(
                 'token' => $token,
-                'email' => $email
+                'id_usuario' => $usuario['id_usuario']
             );
 
             $this->db->insert('resetsenha', $data);

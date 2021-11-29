@@ -1,4 +1,4 @@
-  <script>
+<script>
   function load_messages(){
     $.ajax({
       url:"<?php echo site_url('mensagens/load_messages'); ?>",
@@ -22,12 +22,20 @@
                   '<li class="dropdown-item notification"> <div class="row">'+
                   '<div class="col-4"><p class="font-weight-bold msg">'+nome+' - '+data[count].animal+'</p>'+
                   '<p class="text-sm-left msg">'+data[count].conteudo+'</p></div>'+
+                  '</div></li>'+
+                  '<li class="dropdown-item notification"> <div class="row">'+
+                  '<div class="col-4"><a class="font-weight-bold msg" href="<?php echo site_url('usuarios/chats/adopt'); ?>"><?php echo $this->lang->line('See_more'); ?></a></div>'+
                   '</div></li></a>';
       }
     }
     else
     {
-      output += '<div align="center"><b><?php echo $this->lang->line('No_message'); ?></b></div>';
+      output += '<li class="dropdown-item notification"> <div class="row">'+
+                  '<div class="col-4"><p class="font-weight-bold msg"><?php echo $this->lang->line('No_message'); ?></p></div>'+
+                  '</div></li>'+
+                  '<li class="dropdown-item notification"> <div class="row">'+
+                  '<div class="col-4"><a class="font-weight-bold msg" href="<?php echo site_url('usuarios/chats/adopt'); ?>"><?php echo $this->lang->line('See_more'); ?></a></div>'+
+                  '</div></li></a>';
     }
 
     $('#message_area').html(output);

@@ -2,10 +2,10 @@
         <hr/>
         <ul class="nav nav-tabs">
                 <li class="nav-item">
-                        <a class="nav-link" href="<?php echo site_url('usuarios/mi-au-doreis'); ?>">MI-AU-DOREIS</a>
+                        <a class="nav-link" href="<?php echo site_url('usuarios/mi-au-doreis'); ?>"><?php echo $this->lang->line('Like'); ?>S</a>
                 </li>
                 <li class="nav-item">
-                        <a class="nav-link active" href="<?php echo site_url('usuarios/des-au-gosteis'); ?>">DES-AU-GOSTEIS</a>
+                        <a class="nav-link active" href="<?php echo site_url('usuarios/des-au-gosteis'); ?>"><?php echo $this->lang->line('Dislike'); ?>S</a>
                 </li>
         </ul>
         <?php if($animais){

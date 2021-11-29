@@ -37,10 +37,10 @@
           <div class="mb-4 pb-2">
             <?php echo form_open_multipart('usuarios/review/'.$usuario['id_usuario'].'/'.$animal);?>
               <button type="submit" class="<?php if($likes) echo 'btn btn-primary btn-rounded btn-lg'; else echo 'btn btn-primary-0 btn-rounded btn-lg';?>" name='avaliacao' value='TRUE'>
-                <i class="bi bi-heart-fill"></i> MI-AU-DOREI
+                <i class="bi bi-heart-fill"></i> <?php echo $this->lang->line('Like'); ?>
               </button>
               <button type="submit" class="<?php if($dislikes) echo 'btn btn-primary btn-rounded btn-lg'; else echo 'btn btn-primary-0 btn-rounded btn-lg';?>" name='avaliacao' value='FALSE'>
-                <i class="bi bi-x-circle-fill"></i> DES-AU-GOSTEI
+                <i class="bi bi-x-circle-fill"></i> <?php echo $this->lang->line('Dislike'); ?>
               </button>
             </form>
           </div>

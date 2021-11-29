@@ -135,6 +135,7 @@ class Animais extends CI_Controller {
 
         public function register()
         {
+                $usuario = 
                 $lang = $this->session->get_userdata('site_lang');
                 $lang = $lang['site_lang'];
                 if($lang == 'portuguese') $data['lang'] = 'pt_br';
@@ -248,22 +249,8 @@ class Animais extends CI_Controller {
                 $data['temperamentos'] = $this->temperamentos_model->get_temperamento();
 
                 $this->form_validation->set_rules('nome', 'nome', 'required');
-                $img = 'FALSE';
 
-                if($_FILES('profile_pic')){
-                    $config['upload_path'] = './assets/fotos';
-                    $config['allowed_types'] = 'jpeg|jpg|png|gif';
-                    $config['file_name'] = md5(uniqid(time()));
-
-                    $this->load->library('upload', $config);
-
-
-                    $this->upload->do_upload('profile_pic');
-                    $img = 'TRUE';
-                }
-
-
-                if (($this->form_validation->run() === FALSE))
+                if ($this->form_validation->run() === FALSE)
                 {
                         $this->load->view('templates/header', $data);
                         $this->load->view('animais/edit', $data);
@@ -272,7 +259,7 @@ class Animais extends CI_Controller {
                 }
                 else
                 {
-                        $this->animais_model->update_animal($id_animal, $img);
+                        $this->animais_model->update_animal($id_animal);
                         redirect('usuarios/my_animals', 'refresh');
                 }
         }

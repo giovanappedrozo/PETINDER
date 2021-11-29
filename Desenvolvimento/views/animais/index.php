@@ -1,4 +1,17 @@
 <main class="container">
+        <div class="video-wrapper">
+                <div class="video-text">
+                        <h2 class="page-title"><?php echo $this->lang->line('Why_adopt'); ?><span><?php echo $this->lang->line('Adopt'); ?>?</span></h2><br>
+                        <a class="btn btn-primary btn-rounded btn-lg" href="<?php echo site_url('adoption'); ?>"><?php echo $this->lang->line('About_adoption'); ?></a>
+                        <a class="btn btn-primary btn-rounded btn-lg" href="<?php echo site_url('petinder'); ?>"><?php echo $this->lang->line('About_us'); ?></a>
+                        <a class="btn btn-primary btn-rounded btn-lg" href="https://delegadobrunolima.com.br/2020/11/20/como-denunciar-maus-tratos-em-todo-o-brasil/"><?php echo $this->lang->line('Report_abuse'); ?></a>
+                </div>
+                <?php if($this->session->userdata('site_lang') == 'portuguese'){ ?>
+                        <iframe class="video" src="https://www.youtube.com/embed/hjOY9BVqtlg" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                <?php } else { ?>
+                        <iframe class="video" src="https://www.youtube.com/embed/3LzNQY3aT4c" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+                <?php } ?>
+        </div><br>
         
 <?php 
 

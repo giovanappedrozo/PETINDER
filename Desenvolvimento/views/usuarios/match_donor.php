@@ -2,10 +2,7 @@
         <hr />
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url('usuarios/matches/adotar'); ?>"><?php echo $this->lang->line('Adopt'); ?></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="<?php echo site_url('usuarios/solicitacoes'); ?>">Mi-au-doreis</a>
+                <a class="nav-link" href="<?php echo site_url('usuarios/solicitacoes'); ?>"><?php echo $this->lang->line('Like'); ?>s</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link active" href="<?php echo site_url('usuarios/matches/doar'); ?>">Matches</a>

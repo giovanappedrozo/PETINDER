@@ -63,12 +63,12 @@
             if(data[count].direcao == 'esquerda')
               output += '<div class="d-flex flex-row justify-content-start">'+
             '<div><p class="small p-2 ms-3 mb-1 rounded-3 msg-text-light">'+data[count].conteudo+'</p>'+
-              '<p class="small ms-3 mb-3 rounded-3 text-muted">'+data[count].datahora+'</p></div></div>';
+             '</div></div>';
 
             else
               output += '<div class="d-flex flex-row justify-content-end mb-4 pt-1">'+
               '<div><p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">'+data[count].conteudo+'</p>'+
-              '<p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">'+data[count].datahora+'</p></div></div>';
+              '</div></div>';
           }
         } 
         $('#chat_area').html(output);

@@ -18,6 +18,7 @@
 
                         <!-- API mapa -->
                         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+                        
 
                 </head>
                 <body>
@@ -27,7 +28,8 @@
                                 $logged = $this->session->userdata("logged"); 
                                 $usuario = $this->session->userdata("usuario");
                                 $usuario = explode(" ", $usuario);
-                                $id = $this->session->userdata("id");         
+                                $id = $this->session->userdata("id");  
+                                $localizacao = $this->session->userdata('localizacao');       
                         ?>
                                 <nav class="navbar navbar-expand-lg navbar-light bg-light">
                                         <div class="container-fluid">
@@ -42,14 +44,26 @@
                                                                 <li class="nav-item">
                                                                         <a class="nav-link active" aria-current="page" href="<?php echo site_url('animais'); ?>"><?php echo $this->lang->line('Home'); ?></a>
                                                                 </li>
+
+                                                                <ul class='navbar-nav'>
+                                                                        <li class='nav-item dropdown'>
+                                                                                <a class='nav-link dropdown-toggle menu' id='navbarDropdownMenuLink' role='button' 
+                                                                                data-bs-toggle='dropdown' aria-expanded='false'><?php echo $this->lang->line('Adopt'); ?></a>
+                                                                                <ul class='dropdown-menu' aria-labelledby='navbarDropdownMenuLink'>
+                                                                                        <li><a class='dropdown-item' href='<?php echo site_url('howtoadopt'); ?>'><?php echo $this->lang->line('How_to'); ?></a></li>
+                                                                                        <li><a class='dropdown-item' href='<?php echo site_url('match'); ?>'><?php echo $this->lang->line('Match_happened'); ?></a></li>
+                                                                                </ul>
+                                                                        </li>
+                                                                </ul>
                                                 
                                                                 <li class="nav-item">
-                                                                <a class="nav-link" href="<?php if(!$logged) echo site_url('usuarios/login'); else echo site_url('animais/register'); ?>"><?php echo $this->lang->line('Rehome'); ?></a>
-                                                                </li>
-                                                                
-                                                                <li class="nav-item">
-                                                                        <a class="nav-link" href="<?php if(!$logged) echo site_url('usuarios/login'); else echo site_url('usuarios/chats/adopt'); ?>"><?php echo strtoupper($this->lang->line('Chat')); ?></a>
-                                                                </li>
+                                                                        <a class="nav-link" href='<?php if(!$logged){ echo site_url('usuarios/login');
+                                                                                } elseif(!$localizacao){ 
+                                                                                        echo site_url('usuarios/'.$id); 
+                                                                                }
+                                                                                else echo site_url('animais/register'); ?>'>
+                                                                                <?php echo $this->lang->line('Rehome'); ?></a>
+                                                                </li>                                                                
 
                                                                 <li class="nav-item">
                                                                         <a class="nav-link" href="<?php if($logged) echo site_url('usuarios/match'); else echo site_url('usuarios/login'); ?>"><?php echo $this->lang->line('PftMatch'); ?></a>
@@ -89,7 +103,7 @@
                                                                 echo "<a class='btn-login' href='".site_url('usuarios/register')."'>".$this->lang->line("Title_reg")."</a>";
                                                         }
                                                         else{ ?>
-                                                                &nbsp;<a href="<?php echo site_url('usuarios/matches/adotar'); ?>"><i class="bi bi-bell-fill icones" id="notifications"></i></a>&nbsp;&nbsp;
+                                                                &nbsp;<a href="<?php echo site_url('usuarios/solicitacoes'); ?>"><i class="bi bi-bell-fill icones" id="notifications"></i></a>&nbsp;&nbsp;
 
                                                         <ul class='navbar-nav'>
                                                                 <li class='nav-item dropdown'>
