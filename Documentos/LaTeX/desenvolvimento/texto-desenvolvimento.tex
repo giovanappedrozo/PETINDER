@@ -1,0 +1,95 @@
+\chapter{Desenvolvimento}
+O presente capítulo visa transparecer o processo de desenvolvimento do projeto PETINDER, descrevendo as contribuições da equipe ao longo dos bimestres, incluindo as divisões de tarefas a partir da entrega da proposta inicial, os meios de comunicação utilizados e os problemas enfrentados. 
+
+\section{Primeiro Bimestre}
+No primeiro bimestre (meses maio e junho) houve a criação da equipe TI TI TI e a decisão de dar continuidade no projeto PETINDER, inicialmente desenvolvido pelas integrantes Brenda, Eduarda, Fernanda e Giovana na disciplina técnica \ac{TDS} no ano de 2020.  
+
+A delegação de tarefas deu-se no após a formação da equipe e a escolha do projeto. A equipe realizou reuniões semanais ao longo do projeto através do \gls{Discord} – uma plataforma de comunicação instantânea que permite a troca de mensagens por texto, áudio e vídeo – e utilizaram um grupo no \gls{WhatsApp} para atualizações informais do projeto. 
+
+Quando o projeto PETINDER foi oficialmente aprovado pelos professores da disciplina de \ac{PDS} (\autoref{propostainicial-pdfpages}, a equipe se reuniu para definir a divisão de tarefas de modo que cada integrante contribuísse ao máximo. Nessa reunião foi, também, escolhida como gerente a integrante Giovana Paz. As demais atividades desenvolvidas são mostradas detalhadamente nos Cronogramas Mensais presentes no \autoref{Cronogramas-mensais}.
+
+Nesse bimestre a equipe elaborou a Proposta Inicial, incluída no  \autoref{propostainicial-pdfpages}, dedicando-se à documentação e à apresentação. Foi feito, também, o levantamento das tecnologias a serem utilizadas para o desenvolvimento do \textit{website}.
+
+As tarefas realizadas no primeiro bimestre contaram com a participação integral de todas as integrantes da equipe, assim como mostra os cronogramas mensais através das reuniões semanais realizadas pelo \gls{Discord}. 
+
+\section{Segundo Bimestre}
+No segundo bimestre a equipe focou no avanço da aplicação e da documentação para a apresentação da \ac{POC}.
+Durante esse bimestre, a equipe definiu o servidor de hospedagem, depois de alguns testes e pesquisas explicados mais detalhadamente em \autoref{mudancas}, que melhor atendia as necessidades do projeto, sendo este o \gls{Azure}.
+
+Durante o desenvolvimento, ocorreu um problema com o servidor de hospedagem e os créditos estudantis oferecidos pela plataforma para a conta de uma das integrantes da equipe, onde estava alocada a aplicação. Isso porque a configuração padrão do Azure, definida quando criada a aplicação, não era compatível com os ser vicos oferecidos pela plataforma de forma gratuita para contas de estudantes, assim como as horas de disponibilidade do banco de dados, que, gratuitamente são no máximo 750 horas, e, como a equipe não se atentou a isso, o tempo máximo foi atingido e o serviço ficou indisponível. Devido a isso, o site foi migrado para a conta de outra integrante, onde a aplicação foi criada com as configurações gratuitas da plataforma, e o servidor do banco de dados passou a ser desligado enquanto o site não estivesse sendo usado, ou seja, em manutenções ou apresentações.
+
+Houve a conclusão da comunicação cliente-servidor e banco de dados, do diagrama de arquitetura do sistema, das regras de negócio, requisitos funcionais e não funcionais, também foi gravado e disponibilizado no \gls{YouTube} o vídeo de aderência da \ac{POC}, como solicitado pela matéria.
+
+A equipe concluiu a documentação, encontrada no \autoref{provaconceitual-pdfpages}, e os \textit{slides} para a apresentação da \ac{POC}. Após esta apresentação, a equipe começou a se reorganizar para dar início a documentação final e avançar com a aplicação. Assim, foi iniciado o agrupamento de informações sobre oque era solicitado para a presente documentação e a organização dos apêndices que precisariam ser apresentados.
+
+A realização das tarefas relacionadas à \ac{POC} contaram com a participação integral de todas as integrantes, seja nas reuniões ou na realização das tarefas. Após este momento a integrante Cecília Duarte não participou por mais de 2 semanas das atividades por problemas pessoais, passando a colaborar na realização das tarefas e da presente documentação uma semana antes da apresentação parcial.
+
+\section{Terceiro Bimestre}
+Ao decorrer do período de férias entre o primeiro e segundo semestre, estivemos reorganizando as tarefas para o terceiro bimestre, pois, seria necessário acelerar a finalização tanto do documento, quanto do \textit{website}, em preparação para a apresentação final. Após nos reorganizarmos, além de fazer os reajustes que nos foi solicitado, voltamos de fato ao desenvolvimento do projeto em busca de avanços, dos quais serão citados ao longo do capítulo.
+
+Ao decorrer dos desdobramentos do projeto, a nossa equipe aprimorou a função de distâncias em quilometragem adicionando o mapa para facilitar a visualização. Ajustamos o \gls{Miau-dorei} e \gls{Des-au-gostei}, do qual houve implementação do bate-papo, que é aberto após o \gls{Match} (adotante e doador precisam se curtir mutuamente para que ocorra essa função), também temos a adoção efetivada, após ocorrer a adoção, é registrado que a mesma ocorreu, para que os adotantes que ainda estão procurando o cão e/ou gato fiquem cientes. Além disso, assim como falado na apresentação do \autoref{propostainicial-pdfpages}, nós adicionamos ao nosso \textit{website} a denúncia, porém, assim como mencionado em \autoref{mudancas}, fizemos algumas alterações, em que, caso o usuário se sentir ameaçado e/ou provocado, aciona essa função, e sendo três denúncias, o usuário que foi denunciado sofre um banimento. Não menos importante, completamos a funcionalidade de combinação perfeita que é explicada no \autoref{propostainicial-pdfpages}.
+
+Por fim, assim como foi sugerido pelos nossos orientadores, acrescentamos a opção de filtro. Sua função principal é que o usuário tenha mais facilidade ao procurar o cão e/ou gato, filtrando as suas preferências, podendo desfazer essa alteração futuramente também. Quanto a documentação, estivemos terminando as tabelas de métricas e o modelo de casos de uso, e também acabando o desenvolvimento dos textos, os quais ficaram para o final, pois era necessário, já que alguns precisavam de algumas informações que ainda não haviam sido realizadas. No entanto, agora com maior parte das informações reunidas, conseguimos realizar a parte final da documentação, logo, enviarmos para a apresentação final.
+
+
+\section{Ideia inicial}
+Como ideia inicial para o projeto, a equipe TI TI TI pensou em um aplicativo de adoção e doação de cães e gatos, em que foi nomeado de PETINDER, em semelhança ao aplicativo de namoro já conhecido, \textit{Tinder}. 
+
+As funcionalidades da ideia inicial seriam:
+
+\begin{itemize}
+
+\item Delimitar distância: o sistema lista apenas animais que possuam localização próxima ao adotante;
+
+\item Adotar: processo que possa ser realizado de três maneiras distintas, sendo a primeira de modo manual, onde o usuário procura na listagem de animais registrados no sistema aquele que mais o interesse; a segunda através de filtros, onde, conforme as preferências do usuário, exibe-se uma lista de animais compatíveis com as características estabelecidas pelo usuário no processo de filtragem; e a última, através da "Combinação Perfeita", onde o sistema lista os animais com características compatíveis com as informações fornecidas no formulário de adoção pelo adotante;
+
+\item \gls{Match}: quando o usuário encontra o animal de sua preferência ele pode curtir o perfil do mesmo. A curtida gera uma notificação para o doador que pode corresponde-la ou não. Caso ele corresponda, o sistema colocará ambos em contato através do \textit{chat} disponível na plataforma, e mudará o status do animal de "disponível" para "em processo de adoção". Outros usuários ficarão impossibilitados de curti-lo, porém, poderão ficar em uma fila de espera, caso a adoção não ocorra;
+
+\item Monitorar \textit{chat}: tal funcionalidade proporciona uma restrição de palavras ofensivas, ou seja, caso  o usuário use uma linguagem inapropriada, ele comete uma infração, atingindo o limite de três infrações, este usuário pode ser banido do PETINDER.
+
+\end{itemize}
+
+Por fim, no início do desenvolvimento a equipe optou pelas seguintes tecnologias: 
+
+\begin{itemize}
+\item Front-end: \ac{HTML}5, \ac{CSS}3 e \ac{JS};
+
+\item Framework: \gls{Bootstrap} 4;
+
+\item Back-end: \ac{PHP};
+
+\item Banco de dados: \gls{PostgreSQL} com a extensão \gls{PostGIS};
+
+\item IDE: \gls{VSCode} e \gls{Eclipse};
+
+\item Documentos: \gls{Latex};
+
+\item Controle de Versão: \gls{Subversion};
+
+\item \gls{Gource}.
+\end{itemize}
+
+
+\section{Mudanças e descartes}
+\label{mudancas}
+Logo após o início do desenvolvimento, foi necessário alguns ajustes e descartes de certas ideias, por não serem consideradas ideais em conformidade com o que será elaborado no projeto. À vista disso, ao longo da construção do sistema, houve mudanças no monitoramento de \textit{chat}, no servidor de hospedagem, além do acréscimo da tecnologia \gls{CodeIgniter}, armazenar as imagens no banco de dados e adicionar a opção de doação por \gls{ONGs}.
+
+O monitoramento do \textit{chat}, foi descartado, seguindo uma sugestão dos professores da disciplina, porque essa funcionalidade precisaria de uma "pré definição" de palavras consideradas ofensivas, o que agregaria mais trabalho do que o necessário para o projeto, sobretudo porque essa pré definição poderia trazer problemas futuramente, visto que algumas frases integram algumas das palavras consideradas ofensivas, por isso, essa função poderia acabar punindo um usuário que não tivesse realmente cometido uma infração.
+
+Assim, ocorreram ajustes para que esse monitoramento se aprimorasse optando por um sistema de denúncia, onde caso um usuário se sentir ameaçado e/ou provocado, aciona essa função, e em caso de três denúncias, o infrator será devidamente banido
+
+A equipe optou por adicionar a tecnologia \gls{CodeIgniter} no sistema, pois, além de diminuir o trabalho de fazer inúmeros códigos, facilitará na organização deles.
+
+Para o servidor de hospedagem, a escolha inicial foi o \gls{000Webhost}, um servidor gratuito que hospedava o site PETINDER, porém, ele não gerava o certificado \ac{SSL} e não oferecia a segurança \ac{HTTPS}. A segunda opção testada pela equipe foi o \gls{Heroku}, um dos serviços de hospedagem sugeridos pelos professores, sendo uma plataforma gratuita - com a conta de estudantes -  e que oferece a segurança \ac{HTTPS},  entretanto, o certificado \ac{SSL} gerado era nível B. 
+
+Para atender a exigência dos professores tutores em relação ao certificado de segurança nível A, a equipe migrou para o \gls{Azure}, uma plataforma em nuvem da empresa Microsoft que fornece um plano gratuito para os estudantes do \ac{IFSP}. 
+
+Por fim, considerou-se a ideia de que as imagens seriam armazenadas no banco através do tipo de dados \ac{BLOB}, entretanto, essa prática não é comum devido à sobrecarga do banco que o armazenamento de dados tão grandes pode causar. Dessa forma, a equipe decidiu que o armazenamento seria feito em um diretório da aplicação e apenas os nomes das imagens no banco de dados do sistema.
+
+% - Deixar PHP puro e usar CodeIgniter-
+% - Servidor de hospedagem Heroku e 000-
+% - Armazenamento de imagens dentro do banco
+% - Analise de palavras-
+% - Doacao por ongs tbm
+
+\input{desenvolvimento/texto-resultados}
